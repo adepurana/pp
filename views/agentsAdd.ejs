@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <link type="text/css" rel="stylesheet" href="resource/css/jquery.tagsinput.css" />
+    <link type="text/css" rel="stylesheet" href="resource/css/framework.css" />
+    <link type="text/css" rel="stylesheet" href="resource/css/main.css" />
+    <link type="text/css" rel="stylesheet" href="resource/css/jquery-ui.min.css" />
+
+  </head>
+  <body>
+    <div class="page">
+    <!--header begin-->
+    <header>
+    	<div class="bigcontainer">
+    		<div id="logo">
+    			<a href="./">KLANA</a>
+    		</div>
+    		<div class="user">
+    			<div class="ui inline labeled icon top right pointing dropdown">
+      			<img class="ui avatar image" src="resource/images/avatar-default.gif">
+      			<%= user.local.fullName %>
+            <i class="dropdown icon"></i>
+      				<div class="menu">
+      					<a class="item" href="/logout"><i class="sign out icon"></i>Log Out</a>
+      				</div>
+    			</div>
+    		</div>
+    	</div>
+    </header>
+    <!-- the main menu-->
+    <div class="ui teal inverted menu">
+    	<div class="bigcontainer">
+    		<div class="left menu">
+          <a class="active item" href="/home"><i class="desktop icon"></i>Admin</a>
+    		</div>
+    	</div>
+    </div>
+    <!--the main content begin-->
+    	<div class="container">
+    	<!--the content-->
+    		<div class="ui grid">
+    			<!--the vertical menu-->
+    			<div class="four wide column">
+    				<div class="verticalMenu">
+    					<div class="ui vertical pointing menu fluid">
+                <a class="active teal item" href="/home">
+                <i class="child icon"></i> Agent
+                </a>
+                <a class="teal item" href="/ads">
+                <i class="address book icon"></i> Advertising
+                </a>
+    					</div>
+    				</div>
+    			</div>
+    			<!--the newDevice form-->
+          <div class="twelve wide column">
+    				<div class="pageHeader">
+    					<div class="segment">
+    						<h3 class="ui dividing header">
+      							<i class="large add icon"></i>
+      							<div class="content">
+        							Agent
+        							<div class="sub header">Add</div>
+      							</div>
+    						</h3>
+    					</div>
+    				</div>
+    				<div class="ui form fluid vertical segment">
+              <% for(var i=0; i<message.length; i++) { %>
+                <div class="ui red message"><%= message[i] %></div>
+              <% } %>
+              <form name="form" action="/addagents" method="post">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Full Name</label>
+                                    <input type="text" placeholder="Full Name" id="fullName" name="fullName" value=""/>
+                                </div>
+                                <div class="field">
+                                    <label>Nickname</label>
+                                    <input type="text" placeholder="Nickname" id="nickName" name="nickName" value=""/>
+                                </div>
+                            </div>
+                            <!-- <div class="two fields">
+                                <div class="field">
+                                    <i class="calendar icon"></i>
+                                    <input id="datepicker" name="expiredDate" />
+                                </div>
+                            </div> -->
+                        <input class="ui small blue submit button" type="submit" value="Add">
+                        <a class="ui small basic button" href="/home">Back</a>
+    					</form>
+    					<!--the form end-->
+    				</div>
+    			</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <!--footer begin-->
+    <footer>
+    	<div id="copyrights">
+    		<div class="inset">
+    			<div class="bigcontainer">
+    				<div class="fl">
+    					<h1>Klana</h1>
+    					<p>&copy; 2017 ariadiprana<br />
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </footer>
+
+    <script type="text/javascript" src="resource/javascript/jquery.min.js"></script>
+    <script type="text/javascript" src="/semantic/dist/semantic.min.js"></script>
+    <script type="text/javascript" src="resource/javascript/framework.js"></script>
+    <script type="text/javascript" src="resource/javascript/jquery-ui.min.js"></script>
+    <script>
+     $(document).ready(function() {
+       $("#datepicker").datepicker();
+     });
+     </script>
+     <script>
+       $('.ui.dropdown')
+ 			.dropdown();
+     </script>
+    </body>
+</html>

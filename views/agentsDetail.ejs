@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+  <link type="text/css" rel="stylesheet" href="/resource/css/jquery.tagsinput.css" />
+  <link type="text/css" rel="stylesheet" href="/resource/css/framework.css" />
+  <link type="text/css" rel="stylesheet" href="/resource/css/main.css" />
+  <link type="text/css" rel="stylesheet" href="/resource/css/jquery-ui.min.css" />
+
+</head>
+  <body>
+    <div class="page">
+    <!--header begin-->
+    <header>
+    	<div class="bigcontainer">
+    		<div id="logo">
+    			<a href="./">KLANA</a>
+    		</div>
+    		<div class="user">
+    			<div class="ui inline labeled icon top right pointing dropdown">
+      			<img class="ui avatar image" src="/resource/images/avatar-default.gif">
+      			<%= user.local.fullName %>
+            <i class="dropdown icon"></i>
+      				<div class="menu">
+      					<a class="item" href="/logout"><i class="sign out icon"></i>Log Out</a>
+      				</div>
+    			</div>
+    		</div>
+    	</div>
+    </header>
+    <!-- the main menu-->
+    <div class="ui teal inverted menu">
+    	<div class="bigcontainer">
+    		<div class="left menu">
+          <a class="active item" href="/home"><i class="desktop icon"></i>Admin</a>
+    		</div>
+    	</div>
+    </div>
+    <!--the main content begin-->
+    	<div class="container">
+    	<!--the content-->
+    		<div class="ui grid">
+    			<!--the vertical menu-->
+    			<div class="four wide column">
+    				<div class="verticalMenu">
+    					<div class="ui vertical pointing menu fluid">
+                <a class="active teal item" href="/home">
+                <i class="child icon"></i> Agent
+                </a>
+                <a class="teal item" href="/ads">
+                <i class="address book icon"></i> Advertising
+                </a>
+    					</div>
+    				</div>
+    			</div>
+    			<!--the ADVERTISER DETAIL form-->
+          <div class="twelve wide column">
+    				<div class="pageHeader">
+    					<div class="segment">
+    						<h3 class="ui dividing header">
+      							<i class="large child icon"></i>
+      							<div class="content">
+        							Agent
+        							<div class="sub header">Detail</div>
+      							</div>
+    						</h3>
+    					</div>
+    				</div>
+    				<div class="ui form fluid vertical segment">
+    					<form name="form" action="/addavertisers" method="post">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Full Name</label><%= agents.fullName%>
+                                </div>
+                                <div class="field">
+                                    <label>Nickname</label><%= agents.nickName%>
+                                </div>
+                            </div>
+                        <a class="ui small basic button" href="/home">Back</a>
+    					</form>
+    					<!--the form end-->
+    				</div>
+
+            <!-- ============================================ -->
+
+            <div class="pageHeader">
+    					<div class="segment">
+    						<h3 class="ui dividing header">
+      							<i class="large cloud icon"></i>
+      							<div class="content">
+        							Voucher
+        							<div class="sub header">List</div>
+      							</div>
+    						</h3>
+    					</div>
+    				</div>
+            <div class="ui form fluid vertical segment">
+    							<table class="ui basic table">
+      								<thead>
+        								<tr>
+        								<th>Vendor</th>
+        								<th>Promo Code</th>
+        								<th>Voucher</th>
+        								<th>Counter</th>
+                        <th>Action</th>
+      									</tr>
+    								</thead>
+      							<tbody>
+                      <% for(var i=0; i<ads.length; i++) {%>
+    									<tr>
+          									<td><%=ads[i].vendor %></td>
+          									<td><%=ads[i].promoCode %></td>
+                            <td><a target="_blank" href="<%=ads[i].imageUrl %>"> <img src="<%=ads[i].imageUrl %>" width="250px"/> </a> </td>
+                            <td><%=ads[i].counter %></td>
+    										    <td>
+                              <a class="ui tiny blue edit button" href="/editVoucherAgent/<%= ads[i]._id%>"><i class="browser icon"></i>Edit</a>
+                              <a class="ui tiny basic button" href='/deleteVoucherAgent/<%= ads[i]._id%>'><i class="trash icon"></i>Delete</a>
+                            </td>
+
+        							</tr>
+                      <%}%>
+      							</tbody>
+    							</table>
+    				</div>
+
+    			</div>
+
+
+
+
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <!--footer begin-->
+    <footer>
+    	<div id="copyrights">
+    		<div class="inset">
+    			<div class="bigcontainer">
+    				<div class="fl">
+    					<h1>Klana</h1>
+    					<p>&copy; 2017 ariadiprana<br />
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </footer>
+
+    <script type="text/javascript" src="/resource/javascript/jquery.min.js"></script>
+    <script type="text/javascript" src="/semantic/dist/semantic.min.js"></script>
+    <script type="text/javascript" src="/resource/javascript/framework.js"></script>
+    <script type="text/javascript" src="/resource/javascript/jquery.tagsinput.js"></script>
+    <script type="text/javascript" src="/resource/javascript/jquery-ui.min.js"></script>
+    <script>
+     $(document).ready(function() {
+       $("#datepicker").datepicker();
+     });
+     </script>
+     <script>
+       $('.ui.dropdown')
+ 			.dropdown();
+     </script>
+    </body>
+</html>

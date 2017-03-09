@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+    <link type="text/css" rel="stylesheet" href="/resource/css/framework.css" />
+    <link type="text/css" rel="stylesheet" href="/resource/css/main.css" />
+
+  </head>
+  <body>
+    <div class="page">
+    <!--header begin-->
+    <header>
+    	<div class="bigcontainer">
+    		<div id="logo">
+    			<a href="./">KLANA</a>
+    		</div>
+    		<div class="user">
+    			<div class="ui inline labeled icon top right pointing dropdown">
+      			<img class="ui avatar image" src="resource/images/avatar-default.gif">
+      			<%= user.local.fullName %>
+            <i class="dropdown icon"></i>
+      				<div class="menu">
+      					<a class="item" href="/logout"><i class="sign out icon"></i>Log Out</a>
+      				</div>
+    			</div>
+    		</div>
+    	</div>
+    </header>
+    <!-- the main menu-->
+    <div class="ui teal inverted menu">
+    	<div class="bigcontainer">
+    		<div class="left menu">
+          <a class="active item" href="/home"><i class="desktop icon"></i>Admin</a>
+    		</div>
+    	</div>
+    </div>
+    <!--the main content begin-->
+    	<div class="container">
+    	<!--the content-->
+    		<div class="ui grid">
+    			<!--the vertical menu-->
+    			<div class="four wide column">
+    				<div class="verticalMenu">
+    					<div class="ui vertical pointing menu fluid">
+      						<a class="teal item" href="/home">
+    							<i class="child icon"></i> Agent
+      						</a>
+                  <a class="active teal item" href="/ads">
+    							<i class="address book icon"></i> Advertising
+      						</a>
+    					</div>
+    				</div>
+    			</div>
+    			<!--the newDevice form-->
+    			<div class="twelve wide column">
+    				<div class="pageHeader">
+    					<div class="segment">
+    						<h3 class="ui dividing header">
+      							<i class="address book icon"></i>
+      							<div class="content">
+        							Advertising List
+      							</div>
+    						</h3>
+    					</div>
+    				</div>
+
+            <!-- Content -->
+            <div class="ui vertical segment">
+    					<a class="ui red small labeled icon add button" href="./addads"><i class="add icon"></i>Add</a>
+                        <!-- <div class="ui small icon input right">
+                              <input type="text" placeholder="Search……">
+                              <i class="search icon"></i>
+                        </div> -->
+    				</div>
+    				<div class="ui form fluid vertical segment">
+    							<table class="ui basic table">
+      								<thead>
+        								<tr>
+        								<th>Vendor</th>
+                        <th>Banner</th>
+        								<th>Expired Date</th>
+        								<th>Action</th>
+      									</tr>
+    								</thead>
+      							<tbody>
+                      <% for(var i=0; i<ads.length; i++) {%>
+                      <tr>
+                            <td><a target="_blank" href="<%= ads[i].destinationUrl%>"> <%=ads[i].vendor %> </a></td>
+                            <td><a target="_blank" href="<%=ads[i].imageUrl %>"> <img src="<%=ads[i].imageUrl %>" width="250px"/> </a> </td>
+                            <td><%=dateCustom[i] %></td>
+                            <td>
+                              <a class="ui tiny blue edit button" href="./detailads/<%= ads[i]._id%>"><i class="browser icon"></i>View</a>
+                              <a class="ui tiny basic button" href='./deleteads/<%= ads[i]._id%>'><i class="trash icon"></i>Delete</a>
+                            </td>
+                      </tr>
+                      <%}%>
+      							</tbody>
+    							</table>
+    				</div>
+
+    					</form>
+    					<!--the form end-->
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <!--footer begin-->
+    <footer>
+    	<div id="copyrights">
+    		<div class="inset">
+    			<div class="bigcontainer">
+    				<div class="fl">
+    					<h1>Klana</h1>
+    					<p>&copy; 2017 ariadiprana<br />
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </footer>
+
+    <script type="text/javascript" src="/resource/javascript/jquery.min.js"></script>
+    <script src="/semantic/dist/semantic.min.js"></script>
+    <script type="text/javascript" src="/resource/javascript/framework.js"></script>
+    <script>
+      $('.ui.dropdown')
+			.dropdown();
+    </script>
+    </body>
+</html>
