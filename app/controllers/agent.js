@@ -126,7 +126,7 @@ function search(req,res,next){
 function insert(req,res,next){
     var adsAgent
     var messages = []
-    if(validator.isEmpty(req.body.fullName))mssages.push('Fullname is mandatory field')
+    if(validator.isEmpty(req.body.fullName))messages.push('Fullname is mandatory field')
     if(validator.isEmpty(req.body.nickName))messages.push('Nickname is mandatory field')
     if(messages.length>0){
       console.log(messages);
