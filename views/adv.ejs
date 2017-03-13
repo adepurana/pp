@@ -44,8 +44,8 @@
                 <% if(adsArray[i].isMarketing.toString().localeCompare('true')==0){ %>
                     <!-- <a id="mymodalg" class="btn btn-primary right " role="button">Subscribe For More Offers</a> -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adSubsModal" data-ads-id="<%=adsArray[i]._id%>">Subscribe For More Offers</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TnC" data-tnc="<%=adsArray[i].tncFull%>">T&C</button>
                 <%}%>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TnC" data-tnc="<%=adsArray[i].tncFull%>">T&C</button>
               </p>
           </div>
         </div>
