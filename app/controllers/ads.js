@@ -119,6 +119,7 @@ function updateAds(req,res,next){
             imageUrl:req.body.imageUrl,
             dtExpiry:tomorrow.setDate(tomorrow.getDate()+1),
             destinationUrl:req.body.destinationUrl,
+            isMarketing:req.body.isMarketing,
             tncFull:req.body.tncFull,
             tncBanner:req.body.tncBanner
           }}, function(err,items){
@@ -146,7 +147,6 @@ function updateAds(req,res,next){
                         //----------------- UPDATE LISTING ------------------//
                               if(req.body.agentChecked == null){
                                 AdsAgent.find({}).where('voucherId').equals(req.body.adsId).remove().exec();
-                                console.log('masuk');
                                 Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
                                   if(err)throw err
                                   AdsAgent.find({},'-_id agentId').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
@@ -253,44 +253,87 @@ function updateAds(req,res,next){
                               }
                               // IF ONLY TICKED 1 ITEM
                               else{
-                                for(var i=0;i<req.body.preAgentList.length;i++){
-                                  parse = agentIds.split("-")
-                                  var b = req.body.preAgentList[i].toString()
-                                            .replace("_id","\"_id\"")
-                                            .replace("fullName","\"fullName\"")
-                                            .replace("nickName","\"nickName\"")
-                                            .replace("isTicked","\"isTicked\"")
-                                            .replace("__v","\"__v\"")
-                                            .replace("\'","\"").replace("\'","\"").replace("\'","\"").replace("\'","\"")
-                                  var c = b.substr(0, 9) + "\"" + b.substr(9);
-                                  var d = c.substr(0, 34) + "\"" + c.substr(34);
-                                  var a = JSON.parse(d)
-                                  if(a._id!=parse[0]){
-                                    AdsAgent.find({'agentId':a._id,'voucherId':req.body.adsId}).remove().exec()
-                                  }else if(a._id==parse[0]&&a.isTicked){
-                                    AdsAgent.findOneAndUpdate({agentId:parse[0],voucherId:req.body.adsId},
-                                      {$set:
-                                        {
-                                          vendor:req.body.vendor,
-                                          imageUrl:req.body.imageUrl,
-                                          dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
-                                        }}, function(err,items){})
-                                  }else if(a._id==parse[0]&&!a.isTicked){
-                                    console.log('insert');
-                                    parse = agentIds.split("-")
-                                    adsAgentItem = new AdsAgent({
-                                      agentId:parse[0],
-                                      voucherId:req.body.adsId,
-                                      promoCode:parse[1],
-                                      counter:0,
-                                      vendor:req.body.vendor,
-                                      imageUrl:req.body.imageUrl,
-                                      dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
-                                    })
-                                    adsAgentItem.save(function(err,adsAgent){})
+                                console.log(req.body.preAgentList);
+                                //if only ticked 1 item of 1 item
+                                if(req.body.preAgentList.constructor === Array){
+                                        for(var i=0;i<req.body.preAgentList.length;i++){
+                                          parse = agentIds.split("-")
+                                          var b = req.body.preAgentList[i].toString()
+                                                    .replace("_id","\"_id\"")
+                                                    .replace("fullName","\"fullName\"")
+                                                    .replace("nickName","\"nickName\"")
+                                                    .replace("isTicked","\"isTicked\"")
+                                                    .replace("__v","\"__v\"")
+                                                    .replace("\'","\"").replace("\'","\"").replace("\'","\"").replace("\'","\"")
+                                          var c = b.substr(0, 9) + "\"" + b.substr(9);
+                                          var d = c.substr(0, 34) + "\"" + c.substr(34);
+                                          console.log(d);
+                                          var a = JSON.parse(d)
+                                          if(a._id!=parse[0]){
+                                            AdsAgent.find({'agentId':a._id,'voucherId':req.body.adsId}).remove().exec()
+                                          }else if(a._id==parse[0]&&a.isTicked){
+                                            AdsAgent.findOneAndUpdate({agentId:parse[0],voucherId:req.body.adsId},
+                                              {$set:
+                                                {
+                                                  vendor:req.body.vendor,
+                                                  imageUrl:req.body.imageUrl,
+                                                  dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
+                                                }}, function(err,items){})
+                                          }else if(a._id==parse[0]&&!a.isTicked){
+                                            console.log('insert');
+                                            parse = agentIds.split("-")
+                                            adsAgentItem = new AdsAgent({
+                                              agentId:parse[0],
+                                              voucherId:req.body.adsId,
+                                              promoCode:parse[1],
+                                              counter:0,
+                                              vendor:req.body.vendor,
+                                              imageUrl:req.body.imageUrl,
+                                              dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
+                                            })
+                                            adsAgentItem.save(function(err,adsAgent){})
+                                          }
+                                        }
                                   }
-                                }
-                                console.log('displaaay');
+                                  else{
+                                        parse = agentIds.split("-")
+                                        var b = req.body.preAgentList.toString()
+                                                  .replace("_id","\"_id\"")
+                                                  .replace("fullName","\"fullName\"")
+                                                  .replace("nickName","\"nickName\"")
+                                                  .replace("isTicked","\"isTicked\"")
+                                                  .replace("__v","\"__v\"")
+                                                  .replace("\'","\"").replace("\'","\"").replace("\'","\"").replace("\'","\"")
+                                        var c = b.substr(0, 9) + "\"" + b.substr(9);
+                                        var d = c.substr(0, 34) + "\"" + c.substr(34);
+                                        console.log(d);
+                                        var a = JSON.parse(d)
+                                        if(a._id!=parse[0]){
+                                          AdsAgent.find({'agentId':a._id,'voucherId':req.body.adsId}).remove().exec()
+                                        }else if(a._id==parse[0]&&a.isTicked){
+                                          AdsAgent.findOneAndUpdate({agentId:parse[0],voucherId:req.body.adsId},
+                                            {$set:
+                                              {
+                                                vendor:req.body.vendor,
+                                                imageUrl:req.body.imageUrl,
+                                                dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
+                                              }}, function(err,items){})
+                                        }else if(a._id==parse[0]&&!a.isTicked){
+                                          console.log('insert');
+                                          parse = agentIds.split("-")
+                                          adsAgentItem = new AdsAgent({
+                                            agentId:parse[0],
+                                            voucherId:req.body.adsId,
+                                            promoCode:parse[1],
+                                            counter:0,
+                                            vendor:req.body.vendor,
+                                            imageUrl:req.body.imageUrl,
+                                            dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
+                                          })
+                                          adsAgentItem.save(function(err,adsAgent){})
+                                        }
+                                  }
+                                  // ======
                                   Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
                                     if(err)throw err
                                     AdsAgent.find({},'-_id agentId').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
@@ -304,7 +347,6 @@ function updateAds(req,res,next){
                                           }
                                         }
                                       }
-                                      console.log('agentList',agentList);
                                       res.render('adsDetail',{
                                         agentList : agentList,
                                         dtExpiryCustom : dtExpiryCustom,
@@ -462,6 +504,7 @@ function insert(req,res,next){
         vendor:req.body.vendor,
         imageUrl:req.body.imageUrl,
         destinationUrl:req.body.destinationUrl,
+        isMarketing:req.body.isMarketing,
         tncFull:req.body.tncFull,
         tncBanner:req.body.tncBanner,
         dtExpiry:tomorrow.setDate(tomorrow.getDate()+1),

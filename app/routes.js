@@ -16,6 +16,7 @@ module.exports = function(app, passport) {
 
     app.get('/adv/:nickname', advController.getAdvByNickname);
     app.get('/v/:id', advController.getAdvByVoucherId);
+    app.post('/addSubscriber', advController.addSubscriber);
 
     app.get('/ads', isLoggedIn, adsController.getAll);
     app.get('/addads', isLoggedIn, adsController.getAllDetail);
