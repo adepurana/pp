@@ -145,14 +145,14 @@
                 $('#myInput').focus()
               })
 
-              $('#myModal').on('shown.bs.modal', function (e) {
+              $('#adSubsModal').on('shown.bs.modal', function (e) {
                 document.getElementById("adsId").value=$(e.relatedTarget).data('ads-id');
                 $('#myInput').focus()
               })
 
              $(document).ready(function(){
                 $('.ui.accordion').accordion();
-                $('#myModal').on('shown.bs.modal', function (e) {
+                $('#adSubsModal').on('shown.bs.modal', function (e) {
                   document.getElementById("adsId").value=$(e.relatedTarget).data('ads-id');
                   $('#myInput').focus()
                 })
