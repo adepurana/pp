@@ -3,6 +3,7 @@
 <head>
     <title>Klana System</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="/resource/css/framework.css" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
     <link type="text/css" rel="stylesheet" href="/resource/css/main.css" />
@@ -13,12 +14,22 @@
 
 
   <body>
+  <div class="page">
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
+
+        <header>
+          <div class="bigcontainer">
+            <div id="logo">
+              <a href="http://klana.in">KLANA</a>
+            </div>
+          </div>
+        </header>
+
         <div class="navbar-header">
-          <p class="navbar-up"><br>Nikmati beragam promo menarik berikut dengan kode "<u><b><%= agent.nickName%></b></u>"
+          <p class="navbar-up">Nikmati beragam promo menarik berikut dengan kode "<u><b><%= agent.nickName%></b></u>"
               <br>Tekan
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-ads-id="all">Subscribe</button>
               untuk update selalu promo dari kami.
@@ -106,6 +117,20 @@
       </div>
     </div>
 
+    <footer>
+    	<div id="copyrights">
+    		<div class="inset">
+    			<div class="bigcontainer">
+    				<div class="fl">
+    					<h1>Klana</h1>
+    					<p>&copy; 2017 ariadiprana<br />
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    </footer>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -155,6 +180,8 @@
                   }
               }
     </script>
+
+
 
   </body>
 
