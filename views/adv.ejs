@@ -4,6 +4,7 @@
     <title>Klana System</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
     <link type="text/css" rel="stylesheet" href="/resource/css/main.css" />
     <style>
         body         { padding-top:80px; }
@@ -17,7 +18,12 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <p class="navbar-up">Nikmati beragam promo menarik berikut dengan kode "<u><b><%= agent.nickName%></b></u>"</p>
+          <p class="navbar-up"><br>Nikmati beragam promo menarik berikut dengan kode "<u><b><%= agent.nickName%></b></u>"
+              <br>Tekan
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-ads-id="all">Subscribe</button>
+              untuk update selalu promo dari kami.
+          </p>
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -29,26 +35,127 @@
     <div class="container">
       <div class="spaceforadv">
       <!-- Main component for a primary marketing message or call to action -->
-      <% for(var i=0;i<adsList.length;i++) { %>
-        <div class="jumbotron">
-          <h1><%= adsList[i].vendor %></h1>
-          <img src="<%= adsList[i].imageUrl %>"
-          <br>
-          <p>
-            <a class="btn btn-lg btn-primary" href="/v/<%= adsList[i]._id %>" role="button">Visit &raquo;</a>
-          </p>
+      <% for(var i=0;i<adsAgentList.length;i++) { %>
+        <div class="container">
+          <img class="accordion active" src="<%= adsAgentList[i].imageUrl %>"
+          <div class="panel">
+              <p class="pAds" style="display: none;"><%- adsArray[i].tncBanner.replace(/\n/g,'<br>')%>
+                <br><a class="btn btn-primary right" href="/v/<%= adsAgentList[i]._id %>" role="button">Visit</a>
+                <% if(adsArray[i].isMarketing.toString().localeCompare('true')==0){ %>
+                    <!-- <a id="mymodalg" class="btn btn-primary right " role="button">Subscribe For More Offers</a> -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adSubsModal" data-ads-id="<%=adsArray[i]._id%>">Subscribe For More Offers</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TnC" data-tnc="<%=adsArray[i].tncFull%>">T&C</button>
+                <%}%>
+              </p>
+          </div>
         </div>
       <% } %>
+      </div>
+    </div>
 
-    </div> <!-- /container -->
+
+    <!-- ads Subs modal -->
+    <div class="modal fade" id="adSubsModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Leave your information here</h4>
+          </div>
+          <div class="modal-body">
+            <form name="form" action="/addSubscriber" method="post">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" class="form-control" placeholder="Full Name" id="fullName" name="fullName"/>
+              </div>
+              <div class="form-group">
+                <label>Phone No.</label>
+                <input type="text" class="form-control" placeholder="Phone No." id="phoneNo" name="phoneNo"/>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" placeholder="Email" id="email" name="email"/>
+              </div>
+              <input type="hidden" class="form-control" id="adsId" name="adsId"/>
+              <input type="hidden" class="form-control" id="nickName" name="nickName" value="<%= agent.nickName%>"/>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--TNC modal -->
+    <div class="modal fade" id="TnC" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Term and Condition</h4>
+          </div>
+          <div class="modal-body">
+            <p id="tncFullModal"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="/resource/javascript/jquery.min.js"></script>
+    <script src="/semantic/dist/components/accordion.js"></script>
+    <script type="text/javascript" src="/semantic/dist/semantic.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script language='javascript'>
+              $('#TnC').on('shown.bs.modal', function (e) {
+                document.getElementById("tncFullModal").innerHTML=$(e.relatedTarget).data('tnc').replace(/\n/g,'<br>');
+                $('#myInput').focus()
+              })
+
+              $('#myModal').on('shown.bs.modal', function (e) {
+                document.getElementById("adsId").value=$(e.relatedTarget).data('ads-id');
+                $('#myInput').focus()
+              })
+
+             $(document).ready(function(){
+                $('.ui.accordion').accordion();
+                $('#myModal').on('shown.bs.modal', function (e) {
+                  document.getElementById("adsId").value=$(e.relatedTarget).data('ads-id');
+                  $('#myInput').focus()
+                })
+                $('#TnC').on('shown.bs.modal', function (e) {
+                  $('#myInput').focus()
+                })
+             });
+
+             var acc = document.getElementsByClassName("accordion");
+             var i;
+
+              for (i = 0; i < acc.length; i++) {
+                  acc[i].onclick = function(){
+                      /* Toggle between adding and removing the "active" class,
+                      to highlight the button that controls the panel */
+                      this.classList.toggle("active");
+
+                      /* Toggle between hiding and showing the active panel */
+                      var panel = this.nextElementSibling;
+                      if (panel.style.display === "block") {
+                          panel.style.display = "none";
+                      } else {
+                          panel.style.display = "block";
+                      }
+                  }
+              }
+    </script>
+
   </body>
 
 </html>
