@@ -536,4 +536,13 @@ div.panel {
   .my_custom_menu  {
     width: 1020px;
   }
+
+	body {
+		font-size: 2em;
+	}
+
+	.responsive-width {
+    font-size: 3vw;
+	}
+
 }
