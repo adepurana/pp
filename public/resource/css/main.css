@@ -389,7 +389,7 @@ footer {
 	height:150px;
     min-width:1200px;
 	background:#323232;
-	position:absolute;
+	position:relative;
 	z-index: -20;
 }
 #copyrights {
@@ -449,7 +449,7 @@ h1.valueDashboard{
 }
 
 .navbar-default{
-	background-color: #305c5b;
+	background: url(../images/headerbacnner.jpg);
 }
 
 .navbar-default .navbar-brand{
@@ -526,4 +526,8 @@ div.panel {
     padding: 20px 18px;
     background-color: white;
     display: none;
+}
+
+.boxed {
+  background-color: blue;
 }
