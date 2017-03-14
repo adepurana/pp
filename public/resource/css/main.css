@@ -501,7 +501,7 @@ button.accordion {
     background-color: #eee;
     color: #444;
     cursor: pointer;
-    padding: 18px;
+    /*padding: 18px;*/
     width: 100%;
     text-align: left;
     border: none;
@@ -531,17 +531,18 @@ div.panel {
 
 @media (max-width: 700px) {
   .my_custom_menu  {
-    width: 1020px;
+    width: 100%;
   }
 	.navbar-up {
-		font-size: 22px;
+		font-size: 10px;
+		padding-left:5px;
 	}
 	body {
-		font-size: 22px;
+		font-size: 10px;
 	}
 
 	.responsive-width {
-    font-size: 22px;
+    font-size: 10px;
 	}
 	.img-responsive{
 		width:98%;
