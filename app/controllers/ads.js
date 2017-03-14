@@ -73,6 +73,7 @@ function updateAds(req,res,next){
     }
     if(!validator.isURL(req.body.imageUrl))message.push('Banner URL must be in URL format')
     if(!validator.isURL(req.body.destinationUrl))message.push('Destination URL must be in URL format')
+    if(!validator.contains(req.body.destinationUrl,'http'))message.push('Destination URL must be in URL format')
     if(message.length>0){
       // =============== DISPLAY DATA ============ //
 
@@ -420,10 +421,7 @@ function deleteOne(req,res,next){
         if(err)throw err
         Ads.findByIdAndRemove(req.params.id, function(err,items){
             if(err)throw err
-            Subscriber.find({}).where('adsId').equals(req.params.id).remove().exec(function(err,resultAdsAgent){
-              if(err)throw err
               res.redirect('/ads')
-            })
         })
 
     })
@@ -500,7 +498,7 @@ function insert(req,res,next){
     }
     if(!validator.isURL(req.body.imageUrl))message.push('Banner URL must be in URL format')
     if(!validator.isURL(req.body.destinationUrl))message.push('Destination URL must be in URL format')
-
+    if(!validator.contains(req.body.destinationUrl,'http'))message.push('Destination URL must be in URL format')
     var inputDate = req.body.dtExpiry
     var nowDate = moment(Date.now()).format("MM/DD/YYYY")
     if(inputDate<nowDate) message.push('Expiry Date must be greater than today')
