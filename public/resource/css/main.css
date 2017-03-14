@@ -118,6 +118,12 @@ header{
 	height:72px;
 	background: url(../images/logo2.png) left center no-repeat;
 }
+#logo2{
+	float:left;
+	width:180px;
+	height:72px;
+	background: url(../images/logo3.png) left center no-repeat;
+}
 #logo a{
 	display:block;
 	width:180px;
