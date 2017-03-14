@@ -42,7 +42,7 @@ a {
 	width:100%;
   min-width:1200px;
 	background: #fff;
-	padding-top:5rem;
+	padding-top:6rem;
 	padding-bottom:1rem;
 }
 span.ui.checkbox {
@@ -441,7 +441,7 @@ h1.valueDashboard{
 
 
 .navbar-fixed-top {
-	height: 150px;
+	height: 170px;
 }
 
 .navbar-brand {
@@ -541,14 +541,14 @@ div.panel {
     width: 1020px;
   }
 	.navbar-up {
-		font-size: 18px;
+		font-size: 22px;
 	}
 	body {
-		font-size: 18px;
+		font-size: 22px;
 	}
 
 	.responsive-width {
-    font-size: 18px;
+    font-size: 22px;
 	}
 	.img-responsive{
 		width:98%;
