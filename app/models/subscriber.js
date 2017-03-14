@@ -4,7 +4,8 @@ var subscriberSchema = mongoose.Schema({
     fullName:String,
     phoneNo:String,
     email:String,
-    adsPurposes:String,
+    adsId:String,
+    vendor:String,
     dtCreated:Date
 })
 

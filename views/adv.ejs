@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Klana System</title>
+    <title></title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="/resource/css/framework.css" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
@@ -44,24 +44,19 @@
     </nav>
 
     <div class="container">
-      <div class="spaceforadv">
-      <!-- Main component for a primary marketing message or call to action -->
       <% for(var i=0;i<adsAgentList.length;i++) { %>
-        <div class="container">
-          <img class="accordion active" src="<%= adsAgentList[i].imageUrl %>"
+          <button class="accordion"><img src="<%= adsAgentList[i].imageUrl %>" width="1100px"/></button>
           <div class="panel">
-              <p class="pAds" style="display: none;"><%- adsArray[i].tncBanner.replace(/\n/g,'<br>')%>
-                <br><a class="btn btn-primary right" href="/v/<%= adsAgentList[i]._id %>" role="button">Visit</a>
-                <% if(adsArray[i].isMarketing.toString().localeCompare('true')==0){ %>
-                    <!-- <a id="mymodalg" class="btn btn-primary right " role="button">Subscribe For More Offers</a> -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adSubsModal" data-ads-id="<%=adsArray[i]._id%>">Subscribe For More Offers</button>
-                <%}%>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TnC" data-tnc="<%=adsArray[i].tncFull%>">T&C</button>
-              </p>
+            <p><%- adsArray[i].tncBanner.replace(/\n/g,'<br>')%>
+              <br><a class="btn btn-primary right" href="/v/<%= adsAgentList[i]._id %>" role="button">Visit</a>
+              <% if(adsArray[i].isMarketing.toString().localeCompare('true')==0){ %>
+                  <!-- <a id="mymodalg" class="btn btn-primary right " role="button">Subscribe For More Offers</a> -->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adSubsModal" data-ads-id="<%=adsArray[i]._id%>">Subscribe For More Offers</button>
+              <%}%>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TnC" data-tnc="<%=adsArray[i].tncFull%>">T&C</button>
+            </p>
           </div>
-        </div>
       <% } %>
-      </div>
     </div>
 
 
@@ -116,20 +111,23 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <footer>
-    	<div id="copyrights">
-    		<div class="inset">
-    			<div class="bigcontainer">
-    				<div class="fl">
-    					<h1>Klana</h1>
-    					<p>&copy; 2017 ariadiprana<br />
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </div>
-    </footer>
+
+
+  <footer>
+  	<div id="copyrights">
+  		<div class="inset">
+  			<div class="bigcontainer">
+  				<div class="fl">
+  					<h1>Klana</h1>
+  					<p>&copy; 2017 ariadiprana<br />
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+
+  </footer>
 
 
     <!-- Bootstrap core JavaScript
@@ -161,24 +159,28 @@
                 })
              });
 
-             var acc = document.getElementsByClassName("accordion");
-             var i;
+             
+    </script>
 
-              for (i = 0; i < acc.length; i++) {
-                  acc[i].onclick = function(){
-                      /* Toggle between adding and removing the "active" class,
-                      to highlight the button that controls the panel */
-                      this.classList.toggle("active");
+    <script language="javascript">
+    var acc = document.getElementsByClassName("accordion");
+var i;
 
-                      /* Toggle between hiding and showing the active panel */
-                      var panel = this.nextElementSibling;
-                      if (panel.style.display === "block") {
-                          panel.style.display = "none";
-                      } else {
-                          panel.style.display = "block";
-                      }
-                  }
-              }
+for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function(){
+      /* Toggle between adding and removing the "active" class,
+      to highlight the button that controls the panel */
+      this.classList.toggle("active");
+
+      /* Toggle between hiding and showing the active panel */
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+          panel.style.display = "none";
+      } else {
+          panel.style.display = "block";
+      }
+  }
+}
     </script>
 
 

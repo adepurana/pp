@@ -4,7 +4,7 @@ const moment = require('moment')
 var Ads = require('../models/ads')
 var Agent = require('../models/agent')
 var AdsAgent = require('../models/adsagent')
-
+var Subscriber = require('../models/subscriber')
 
 module.exports = {
   insert: insert,
@@ -130,9 +130,22 @@ function updateAds(req,res,next){
                       vendor:req.body.vendor,
                       imageUrl:req.body.imageUrl,
                       dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
-                    }},
+                    }},{multi: true},
                     function(err,adsAgent){
                       if(err)throw err
+
+                      //update subscribers
+                      Subscriber.update({adsId:req.body.adsId},
+                        {$set:
+                          {
+                            vendor:req.body.vendor
+                          }
+                        },{multi: true}, function(err,items){
+                            if(err)throw err
+                          }
+                      )
+
+
 
                       // =============== DISPLAY DATA ============ //
                       Ads.findById(req.body.adsId, function(err,itemsAds){
@@ -407,7 +420,10 @@ function deleteOne(req,res,next){
         if(err)throw err
         Ads.findByIdAndRemove(req.params.id, function(err,items){
             if(err)throw err
-            res.redirect('/ads')
+            Subscriber.find({}).where('adsId').equals(req.params.id).remove().exec(function(err,resultAdsAgent){
+              if(err)throw err
+              res.redirect('/ads')
+            })
         })
 
     })

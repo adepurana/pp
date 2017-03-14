@@ -20,7 +20,8 @@ function addSubscriber(req,res,next){
         fullName:req.body.fullName,
         phoneNo:req.body.phoneNo,
         email:req.body.email,
-        adsPurposes:ads._id,
+        adsId:ads._id,
+        vendor:ads.vendor,
         dtCreated:Date.now()
       })
       subscriber.save(function(err,subs){
@@ -34,7 +35,8 @@ function addSubscriber(req,res,next){
       fullName:req.body.fullName,
       phoneNo:req.body.phoneNo,
       email:req.body.email,
-      adsPurposes:req.body.adsId,
+      adsId:req.body.adsId,
+      vendor:'All',
       dtCreated:Date.now()
     })
     subscriber.save(function(err,subs){

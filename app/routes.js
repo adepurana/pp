@@ -5,6 +5,7 @@ module.exports = function(app, passport) {
     const agentController = require('./controllers/agent')
     const adsController = require('./controllers/ads')
     const advController = require('./controllers/adv')
+    const subscriberController = require('./controllers/subscriber')
     // Agents
     app.get('/addagents', isLoggedIn, agentController.addAgentDisplay);
     app.post('/addagents', isLoggedIn, agentController.insert);
@@ -25,6 +26,7 @@ module.exports = function(app, passport) {
     app.get('/deleteads/:id', isLoggedIn, adsController.deleteOne);
     app.get('/detailads/:id', isLoggedIn, adsController.detailads);
 
+    app.get('/subscribers', isLoggedIn, subscriberController.getAll);
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
