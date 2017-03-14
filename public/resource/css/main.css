@@ -532,6 +532,10 @@ div.panel {
   background-color: blue;
 }
 
+.img-responsive{
+	width:1200px;
+}
+
 @media (max-width: 700px) {
   .my_custom_menu  {
     width: 1020px;
