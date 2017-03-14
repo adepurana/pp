@@ -541,17 +541,17 @@ div.panel {
     width: 1020px;
   }
 	.navbar-up {
-		font-size: 0.5em;
+		font-size: 18px;
 	}
 	body {
-		font-size: 2em;
+		font-size: 18px;
 	}
 
 	.responsive-width {
-    font-size: 1em;
+    font-size: 18px;
 	}
 	.img-responsive{
-		width:100%;
+		width:98%;
 	}
 
 }
