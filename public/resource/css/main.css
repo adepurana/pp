@@ -550,5 +550,8 @@ div.panel {
 	.responsive-width {
     font-size: 1em;
 	}
+	.img-responsive{
+		width:100%;
+	}
 
 }
