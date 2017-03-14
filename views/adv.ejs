@@ -32,7 +32,7 @@
         <div class="navbar-header">
           <p class="navbar-up">Nikmati beragam promo menarik berikut dengan kode "<u><b><%= agent.nickName%></b></u>"
               <br>Tekan
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adSubsModal" data-ads-id="all">Subscribe</button>
+              <button type="button" class="btn btn-primary responsive-width" data-toggle="modal" data-target="#adSubsModal" data-ads-id="all">Subscribe</button>
               untuk mendapatkan update semua promo dari kami.
           </p>
 
@@ -48,7 +48,7 @@
       <% for(var i=0;i<adsAgentList.length;i++) { %>
         <div class="row">
           <div class="col-md-16">
-          <button class="accordion"><img src="<%= adsAgentList[i].imageUrl %>" class="img-responsive" width="1200px"/></button>
+          <button class="accordion responsive-width"><img src="<%= adsAgentList[i].imageUrl %>" class="img-responsive" width="1200px"/></button>
           <div class="panel">
             <p>
               Kode promo : <b><%= adsAgentList[i].promoCode%></b>
@@ -56,9 +56,9 @@
               <br><a class="btn btn-primary right" href="/v/<%= adsAgentList[i]._id %>" role="button">Visit</a>
               <% if(adsArray[i].isMarketing.toString().localeCompare('true')==0){ %>
                   <!-- <a id="mymodalg" class="btn btn-primary right " role="button">Subscribe For More Offers</a> -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adSubsModal" data-ads-id="<%=adsArray[i]._id%>">Subscribe For More Offers</button>
+                  <button type="button" class="btn btn-primary responsive-width" data-toggle="modal" data-target="#adSubsModal" data-ads-id="<%=adsArray[i]._id%>">Subscribe For More Offers</button>
               <%}%>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TnC" data-tnc="<%=adsArray[i].tncFull%>">T&C</button>
+              <button type="button" class="btn btn-primary responsive-width" data-toggle="modal" data-target="#TnC" data-tnc="<%=adsArray[i].tncFull%>">T&C</button>
             </p>
           </div>
         </div>
@@ -72,7 +72,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close responsive-width" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Leave your information here</h4>
           </div>
           <div class="modal-body">
@@ -91,11 +91,11 @@
               </div>
               <input type="hidden" class="form-control" id="adsId" name="adsId"/>
               <input type="hidden" class="form-control" id="nickName" name="nickName" value="<%= agent.nickName%>"/>
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="submit" class="btn btn-default responsive-width">Submit</button>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default responsive-width" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -106,14 +106,14 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close responsive-width" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Term and Condition</h4>
           </div>
           <div class="modal-body">
             <p id="tncFullModal"></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default responsive-width" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
