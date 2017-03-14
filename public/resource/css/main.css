@@ -529,14 +529,14 @@ div.panel {
 	width:100%;
 }
 
-
+body         {  padding-top: 200px; width:100%; }
 @media (max-width: 700px) {
   .my_custom_menu  {
     width: 100%;
   }
 	.navbar-up {
 		font-size: 10px;
-		padding-left:5px;
+		padding-left:10px;
 	}
 	body {
 		font-size: 10px;
@@ -547,6 +547,26 @@ div.panel {
 	}
 	.img-responsive{
 		width:98%;
+	}
+
+	#logo2{
+		float:left;
+		width:180px;
+		height:52px;
+		background: url(../images/logo3.png) left center no-repeat;
+		background-size: 100px ;
+	}
+
+	header{
+		height:0px;
+	}
+
+	.navbar-fixed-top{
+		height: 110px;
+	}
+
+	body {
+		padding-top: 120px;
 	}
 
 }
