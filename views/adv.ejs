@@ -45,7 +45,9 @@
 
     <div class="container">
       <% for(var i=0;i<adsAgentList.length;i++) { %>
-          <button class="accordion"><img src="<%= adsAgentList[i].imageUrl %>" width="1100px"/></button>
+        <div class="row">
+          <div class="col-md-12">
+          <button class="accordion"><img src="<%= adsAgentList[i].imageUrl %>" class="img-responsive"/></button>
           <div class="panel">
             <p>
               Kode promo : <b><%= adsAgentList[i].promoCode%></b>
@@ -58,6 +60,8 @@
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TnC" data-tnc="<%=adsArray[i].tncFull%>">T&C</button>
             </p>
           </div>
+        </div>
+      </div>
       <% } %>
     </div>
 
