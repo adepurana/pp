@@ -62,15 +62,20 @@ function getAdvByVoucherId(req,res,next){
 function getAdvByNickname(req,res,next){
   var nickname = req.params.nickname
   var adsArray = []
+  var empty = 0
+  var adsAgentListNew = []
   Agent.findOne({nickName:nickname}).exec(function(err,agent){
     if(!agent)res.redirect('http://klana.in/')
     else{
       AdsAgent.find({agentId:agent._id}).sort({"vendor":"asc"}).exec(function(err,adsAgentList){
         //console.log(adsAgentList);
         for(var i=0; i<adsAgentList.length;i++){
-            Ads.findOne({_id:adsAgentList[i].voucherId}).exec(function(err,ads){
-              adsArray.push(ads)
-              if(adsArray.length==adsAgentList.length){
+            Ads.findOne({_id:adsAgentList[i].voucherId, dtExpiry: {
+              $gte: Date.now()
+            }}).exec(function(err,ads){
+              if(ads==null)empty++;
+              else adsArray.push(ads)
+              if(adsArray.length==adsAgentList.length-empty){
 
                 adsArray.sort(function(a, b){
                 	var nameA=a.vendor.toLowerCase(), nameB=b.vendor.toLowerCase()
@@ -80,9 +85,17 @@ function getAdvByNickname(req,res,next){
                 		return 1
                 	return 0 //default return value (no sorting)
                 })
+
+                //function for only take adsagentlist which not expired ,
+                for(var i=0;i<adsAgentList.length;i++){
+                  for(var j=0;j<adsArray.length;j++){
+                      if(adsAgentList[i].vendor==adsArray[j].vendor)adsAgentListNew.push(adsAgentList[i])
+                  }
+                }
+
                 res.render('adv.ejs',{
                   agent:agent,
-                  adsAgentList : adsAgentList,
+                  adsAgentList : adsAgentListNew,
                   adsArray: adsArray
                 });
               }
