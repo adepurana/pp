@@ -31,7 +31,7 @@
         </header>
 
         <div class="navbar-header">
-          <p class="navbar-up">Nikmati beragam promo menarik berikut dengan kode "<u><b><%= agent.nickName%></b></u>"
+          <p class="navbar-up">Nikmati beragam promo menarik berikut</b></u>
               <br>Tekan
               <button type="button" class="btn btn-primary responsive-width" data-toggle="modal" data-target="#adSubsModal" data-ads-id="all">Subscribe</button>
               untuk mendapatkan update semua promo dari kami.
@@ -92,10 +92,11 @@
               </div>
               <input type="hidden" class="form-control" id="adsId" name="adsId"/>
               <input type="hidden" class="form-control" id="nickName" name="nickName" value="<%= agent.nickName%>"/>
-              <button type="submit" class="btn btn-default responsive-width">Submit</button>
+              <button type="submit" class="btn btn-default responsive-width">Submit *</button>
             </form>
           </div>
           <div class="modal-footer">
+            <p align="left" style="font-size:12px">* dengan mengklik tombol submit di bawah ini Anda telah menyetujui bahwa data yang Anda isi di atas dapat dipergunakan untuk keperluan pemasaran</p>
             <button type="button" class="btn btn-default responsive-width" data-dismiss="modal">Close</button>
           </div>
         </div>
