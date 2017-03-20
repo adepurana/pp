@@ -89,7 +89,7 @@ function deleteOne(req,res,next){
         if(err)throw err
         items.remove((err)=> {
           if(err) throw err
-          res.redirect('/home')
+          res.redirect('/admin/home')
         })
     })
   })
@@ -179,7 +179,7 @@ function insert(req,res,next){
               }
             })
           })
-          res.redirect('/home')
+          res.redirect('/admin/home')
         }
 
       }

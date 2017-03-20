@@ -6,41 +6,48 @@ module.exports = function(app, passport) {
     const adsController = require('./controllers/ads')
     const advController = require('./controllers/adv')
     const subscriberController = require('./controllers/subscriber')
+    const homeController = require('./controllers/home')
     // Agents
-    app.get('/addagents', isLoggedIn, agentController.addAgentDisplay);
-    app.post('/addagents', isLoggedIn, agentController.insert);
-    app.get('/agents/:id', isLoggedIn, agentController.detail);
-    app.get('/deleteagents/:id', isLoggedIn, agentController.deleteOne);
-    app.get('/editVoucherAgent/:id', isLoggedIn, agentController.editAgentDisplay);
-    app.get('/deleteVoucherAgent/:id', isLoggedIn, agentController.deleteVoucherAgent);
-    app.post('/editVoucherAgent', isLoggedIn, agentController.saveVoucherAgent);
+    app.get('/', homeController.home);
+    app.get('/advert', homeController.advert);
+    
+    app.get('/admin/addagents', isLoggedIn, agentController.addAgentDisplay);
+    app.post('/admin/addagents', isLoggedIn, agentController.insert);
+    app.get('/admin/agents/:id', isLoggedIn, agentController.detail);
+    app.get('/admin/deleteagents/:id', isLoggedIn, agentController.deleteOne);
+    app.get('/admin/editVoucherAgent/:id', isLoggedIn, agentController.editAgentDisplay);
+    app.get('/admin/deleteVoucherAgent/:id', isLoggedIn, agentController.deleteVoucherAgent);
+    app.post('/admin/editVoucherAgent', isLoggedIn, agentController.saveVoucherAgent);
 
-    app.get('/adv/:nickname', advController.getAdvByNickname);
+    app.get('/admin/ads', isLoggedIn, adsController.getAll);
+    app.get('/admin/addads', isLoggedIn, adsController.getAllDetail);
+    app.post('/admin/addads', isLoggedIn, adsController.insert);
+    app.post('/admin/updateads', isLoggedIn, adsController.updateAds);
+    app.get('/admin/deleteads/:id', isLoggedIn, adsController.deleteOne);
+    app.get('/admin/detailads/:id', isLoggedIn, adsController.detailads);
+
+    app.get('/admin/subscribers', isLoggedIn, subscriberController.getAll);
+
+
     app.get('/v/:id', advController.getAdvByVoucherId);
     app.post('/addSubscriber', advController.addSubscriber);
 
-    app.get('/ads', isLoggedIn, adsController.getAll);
-    app.get('/addads', isLoggedIn, adsController.getAllDetail);
-    app.post('/addads', isLoggedIn, adsController.insert);
-    app.post('/updateads', isLoggedIn, adsController.updateAds);
-    app.get('/deleteads/:id', isLoggedIn, adsController.deleteOne);
-    app.get('/detailads/:id', isLoggedIn, adsController.detailads);
-
-    app.get('/subscribers', isLoggedIn, subscriberController.getAll);
 
     // show the home page (will also have our login links)
-    app.get('/', function(req, res) {
+    app.get('/admin', function(req, res) {
         res.render('index.ejs');
     });
 
     // HOME SECTION =========================
-    app.get('/home', isLoggedIn, agentController.getAll);
+    app.get('/admin/home', isLoggedIn, agentController.getAll);
 
     // LOGOUT ==============================
-    app.get('/logout', function(req, res) {
+    app.get('/admin/logout', function(req, res) {
         req.logout();
-        res.redirect('/');
+        res.redirect('/admin');
     });
+
+    app.get('/:nickname', advController.getAdvByNickname);
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
@@ -49,27 +56,27 @@ module.exports = function(app, passport) {
     // locally --------------------------------
         // LOGIN ===============================
         // show the login form
-        app.get('/login', function(req, res) {
+        app.get('/admin/login', function(req, res) {
             res.render('login.ejs', { message: req.flash('loginMessage') });
         });
 
         // process the login form
-        app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/home', // redirect to the secure home section
-            failureRedirect : '/login', // redirect back to the signup page if there is an error
+        app.post('/admin/login', passport.authenticate('local-login', {
+            successRedirect : '/admin/home', // redirect to the secure home section
+            failureRedirect : '/admin/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
 
         // SIGNUP =================================
         // show the signup form
-        app.get('/signup', function(req, res) {
+        app.get('/admin/signup', function(req, res) {
             res.render('signup.ejs', { message: req.flash('signupMessage') });
         });
 
         // process the signup form
-        app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/home', // redirect to the secure home section
-            failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        app.post('/admin/signup', passport.authenticate('local-signup', {
+            successRedirect : '/admin/home', // redirect to the secure home section
+            failureRedirect : '/admin/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
 
@@ -78,12 +85,12 @@ module.exports = function(app, passport) {
 // =============================================================================
 
     // locally --------------------------------
-        app.get('/connect/local', function(req, res) {
+        app.get('/admin/connect/local', function(req, res) {
             res.render('connect-local.ejs', { message: req.flash('loginMessage') });
         });
-        app.post('/connect/local', passport.authenticate('local-signup', {
-            successRedirect : '/home', // redirect to the secure home section
-            failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
+        app.post('/admin/connect/local', passport.authenticate('local-signup', {
+            successRedirect : '/admin/home', // redirect to the secure home section
+            failureRedirect : '/admin/connect/local', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
 
@@ -101,7 +108,7 @@ module.exports = function(app, passport) {
         user.local.email    = undefined;
         user.local.password = undefined;
         user.save(function(err) {
-            res.redirect('/home');
+            res.redirect('/admin/home');
         });
     });
 };

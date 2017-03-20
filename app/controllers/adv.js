@@ -65,7 +65,7 @@ function getAdvByNickname(req,res,next){
   var empty = 0
   var adsAgentListNew = []
   Agent.findOne({nickName:nickname}).exec(function(err,agent){
-    if(!agent)res.redirect('http://klana.in/')
+    if(!agent)res.redirect('/')
     else{
       AdsAgent.find({agentId:agent._id}).sort({"vendor":"asc"}).exec(function(err,adsAgentList){
         //console.log(adsAgentList);

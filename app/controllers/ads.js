@@ -421,7 +421,7 @@ function deleteOne(req,res,next){
         if(err)throw err
         Ads.findByIdAndRemove(req.params.id, function(err,items){
             if(err)throw err
-              res.redirect('/ads')
+              res.redirect('/admin/ads')
         })
 
     })
@@ -529,7 +529,7 @@ function insert(req,res,next){
         var adsAgentItem,parse
 
         if(req.body.agentChecked == null){
-          res.redirect('/ads')
+          res.redirect('/admin/ads')
         }
         else {
           var agentIds = req.body.agentChecked
@@ -549,7 +549,7 @@ function insert(req,res,next){
                 if(err) throw err
               })
             }
-              res.redirect('/ads')
+              res.redirect('/admin/ads')
           }
           else{
             parse = agentIds.split("-")
@@ -564,7 +564,7 @@ function insert(req,res,next){
             })
             adsAgentItem.save(function(err,adsAgent){
               if(err) throw err
-              res.redirect('/ads')
+              res.redirect('/admin/ads')
             })
           }
         }
