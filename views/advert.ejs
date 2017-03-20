@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+	    <title>Klana</title>
+	    <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
+
+
+	    <!-- core CSS -->
+	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <link href="/css/materialize.css" rel="stylesheet">
+	    <link href="/css/font-awesome.css" rel="stylesheet">
+	    <link href="/css/mystyle-default.css" rel="stylesheet">
+	    <link href="/css/mystyle-edit.css" rel="stylesheet">
+	    <link href="/css/select_edit.css" rel="stylesheet">
+
+
+	    <!-- core JS -->
+	    <script src="/js/jquery.min.js"></script>
+	    <script src="/js/materialize.js"></script>
+
+		<style type="text/css">
+
+		   @font-face {
+            font-family: "head";
+            src: url('fonts/gotham_head.otf');
+            }
+            .font-head {
+                font-family: "head";
+            }
+
+
+		</style>
+
+
+	</head>
+	<body class="font-sub">
+	<section class="row" style="background-image:url('/img/banner_aksen.jpg'); background-size:cover; background-repeat: no-repeat; min-height: 100vh">
+
+		<!-- <header class="no-shadow"> -->
+			<div class="navbar-fixed latar-hijau" style="z-index:10; box-shadow: none;">
+			<div class="container">
+				<nav class=" latar-hijau no-shadow"  style="padding:0px 30px">
+				    <div class="nav-wrapper">
+				    	<div class=" visible-md visible-lg">
+					    	<a href="/" class="brand-logo" style="margin-left:10px"><img src="/img/logo_beta_putih.png" width="100%"></a>
+						    <ul class="right hide-on-med-and-down" style="padding-right: 10px">
+						    	<li><a href="/" class=" white-text">DRIVER</a></li>
+						    	<li style="margin-right:20px"><a href="/advert" class=" text-orange">ADVERTISER</a></li>
+						    	<li class="input-field" style="width: 30px">
+							    	<select id="selectBhs" onChange="changeBhs()">
+							    		<option value="ina">ID</option>
+							    		<option value="eng" selected>EN</option>
+							    	</select>
+						    	</li>
+						    </ul>
+					    </div>
+
+					    <div class="visible-xs visible-sm">
+					    	<a href="/" class="left brand-logo" style="margin-left:-10px"><img src="/img/logo_beta_putih.png" width="85%"></a>
+
+					    	 <div class="input-field right" style="width: 35px">
+							   <select id="selectBhs_mobile" onChange="changeBhs_mobile()">
+							    	<option value="ina">ID</option>
+							    	<option value="eng" selected>EN</option>
+							    </select>
+						    </div>
+
+						   <div class="right"  style="margin-right:30px">
+						    <a class="dropdown-button" href="#!" data-activates="dropdown1" data-beloworigin="true">MENU<i class="material-icons right" style="margin-left: -2px">arrow_drop_down</i></a>
+						   </div>
+
+					    </div>
+					    <!-- Dropdown Structure -->
+						<ul id="dropdown1" class="dropdown-content">
+						  <li><a href="/">Driver</a></li>
+						  <li><a href="/advert">Advertiser</a></li>
+						</ul>
+
+
+
+				    </div>
+				  </nav>
+			</div>
+		<!-- </header> -->
+			</div>
+
+			<div class="container">
+				<div class="col l5 m5 s12 no-padding">
+					<div class="col l12 m12 s12">
+						<h3 class="font-head text-hijau space-top-mid">DRIVE YOUR SALES.</h3>
+						<!-- <h5 class="text-hijau">Monitor. Manage. Sell.</h5> -->
+						<h4 class="text-hijau space-top-min">Monitor.</h4>
+						<h4 class="text-hijau margin-up-min eng">Manage.</h4>
+						<h4 class="text-hijau margin-up-min ina">Atur.</h4>
+						<h4 class="text-hijau margin-up-min space-bottom-min eng">Scale.</h4>
+						<h4 class="text-hijau margin-up-min space-bottom-min ina">Tingkatkan.</h4>
+						<a class="btn-large latar-orange waves-effect waves-orange text-hijau no-shadow modal-trigger eng" href="#mail" style="border-radius: 5px; padding:0px 20px 10px 20px">Connect with us!</a>
+						<a class="btn-large latar-orange waves-effect waves-orange text-hijau no-shadow modal-trigger ina" href="#mail" style="border-radius: 5px; padding:0px 20px 10px 20px">Hubungi kami!</a>
+
+						<div class="visible-md visible-lg visible-sm">
+							<h6 class="text-hijau light space-top eng">Soon to be available on</h6>
+							<h6 class="text-hijau light space-top ina">Segera tersedia di</h6>
+						</div>
+						<div class="visible-xs">
+							<h6 class="text-hijau light space-top-min eng">Soon to be available on</h6>
+							<h6 class="text-hijau light space-top-min ina">Segera tersedia di</h6>
+						</div>
+					</div>
+					<div class="col l3 m3 s6">
+						<img src="/img/playstore.png" width="100%">
+					</div>
+					<div class="col l3 m3 s6">
+						<img src="/img/appstore.png" width="100%">
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="visible-md visible-lg visible-sm">
+					<div class="col l8 m8 right" style="margin-top: -420px">
+						<img src="/img/banner_front3.png" width="100%">
+					</div>
+				</div>
+				<div class="visible-xs">
+					<div class="col s12 right" style="margin-top:70px">
+						<img src="/img/banner_front3.png" width="100%">
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+		<section class="row grey lighten-3 center" style="margin-top:-40px; padding-top: 10px; padding-bottom: 10px">
+        	<div class="container">
+
+        		<p class="grey-text text-darken-3 light center">Trusted By</p>
+
+        		<div class="col l2 m2 s4 push-l3 push-m3 push-s2 center margin-up-min">
+        			<a href="http://www.sandarandara.com" class="opacity"><img src="/img/magale.png" width="80%"></a>
+        			<h6 class="grey-text text-darken-3 margin-up-mid">Magale</h6>
+        		</div>
+        		<div class="col l2 m2 s4 push-l5 push-m5 push-s2 center margin-up-min">
+        			<a href="http://www.olrange.com" class="opacity"><img src="/img/olrange.png" width="80%" ></a>
+        			<h6 class="grey-text text-darken-3 margin-up-mid">Olrange</h6>
+        		</div>
+        	</div>
+        </section>
+
+
+
+
+		<section class="row" style="margin-top:-21px;min-height: 100vh; padding:90px 0px 50px 0px; background-image:url('/img/banner_aksen2.jpg'); background-size: cover; background-repeat:no-repeat;">
+        	<div class="container">
+        		<div class="col l12 m12 s12 space-bottom-mid center">
+        			<h4 class="text-hijau font-head">DRIVE YOUR SALES</h4>
+        			<h5 class="text-hijau margin-up-min eng">Advertise with Klana</h5>
+        			<h5 class="text-hijau margin-up-min ina">Beriklan dengan Klana</h5>
+        		</div>
+	        	<div class="clearfix"></div>
+	        	<!-- <div class="visible-md visible-sm visible-lg"> -->
+	        		<div class="col l2 m2 push-l1 push-m1 s6 center">
+	        			<img src="/img/info/a_1.png" width="80%" style="z-index: 100">
+	        			<div class="visible-lg visible-sm visible-md">
+	        				<h6 class="font-head text-hijau"><b>TARGET</b></h6>
+	        			</div>
+	        			<div class="visible-xs">
+	        				<h6 class="font-head text-hijau"><b>1. TARGET</b></h6>
+	        			</div>
+        				<h6 class="text-hijau eng">Target areas where you want your ad seen most often</h6>
+        				<h6 class="text-hijau ina">Targetkan lokasi-lokasi prioritas untuk iklan anda</h6>
+	        		</div>
+	        		<div class="col l2 m2 push-l1 push-m1 s6 center">
+	        			<img src="/img/info/a_2.png" width="80%" style="z-index: 100">
+	        			<div class="visible-lg visible-sm visible-md">
+	        				<h6 class="font-head text-hijau eng"><b>DIRECT</b></h6>
+	        				<h6 class="font-head text-hijau ina"><b>ARAHAKAN</b></h6>
+	        			</div>
+	        			<div class="visible-xs">
+	        				<h6 class="font-head text-hijau eng"><b>2. DIRECT</b></h6>
+	        				<h6 class="font-head text-hijau ina"><b>2. ARAHKAN</b></h6>
+	        			</div>
+        				<h6 class="text-hijau eng">Direct ads to specific locations at certain times using our Rally offer</h6>
+        				<h6 class="text-hijau ina">Arahkan iklan ke lokasi-lokasi spesifik pada waktu tertentu dengan penawaran Rally kami</h6>
+	        		</div>
+	        		<div class="col l2 m2 push-l1 push-m1 s6 center">
+	        			<img src="/img/info/a_3.png" width="80%" style="z-index: 100">
+	        			<div class="visible-lg visible-sm visible-md">
+	        				<h6 class="font-head text-hijau eng"><b>TRACK</b></h6>
+	        				<h6 class="font-head text-hijau ina"><b>PANTAU</b></h6>
+	        			</div>
+	        			<div class="visible-xs">
+	        				<h6 class="font-head text-hijau eng"><b>3. TRACK</b></h6>
+	        				<h6 class="font-head text-hijau ina"><b>3. PANTAU</b></h6>
+	        			</div>
+        				<h6 class="text-hijau eng">Know where your ads are moving real-time</h6>
+        				<h6 class="text-hijau ina">Ketahui dimana iklan anda sedang bergerak secara real-time</h6>
+	        		</div>
+	        		<div class="col l2 m2 push-l1 push-m1 s6 center">
+	        			<img src="/img/info/a_4.png" width="80%" style="z-index: 100">
+	        			<div class="visible-lg visible-sm visible-md">
+	        				<h6 class="font-head text-hijau"><b>MONITOR</b></h6>
+	        			</div>
+	        			<div class="visible-xs">
+	        				<h6 class="font-head text-hijau"><b>4. MONITOR</b></h6>
+	        			</div>
+        				<h6 class="text-hijau eng">Estimate the effectiveness of your ad</h6>
+        				<h6 class="text-hijau ina">Estimasi efektivitas iklan Anda</h6>
+	        		</div>
+	        		<div class="visible-xs">
+	        			<div class="clearfix"></div>
+	        		</div>
+	        		<div class="col l2 m2 push-l1 push-m1 s6 center">
+	        			<img src="/img/info/a_5.png" width="80%" style="z-index: 100">
+	        			<div class="visible-lg visible-sm visible-md">
+	        				<h6 class="font-head text-hijau eng"><b>ANALYZE & EVALUATE</b></h6>
+	        				<h6 class="font-head text-hijau ina"><b>ANALISA DAN EVALUASI</b></h6>
+	        			</div>
+	        			<div class="visible-xs">
+	        				<h6 class="font-head text-hijau eng"><b>5. ANALYZE & EVALUATE</b></h6>
+	        				<h6 class="font-head text-hijau ina"><b>5. ANALISA DAN EVALUASI</b></h6>
+	        			</div>
+        				<h6 class="text-hijau eng">Perform deep analytics through our comprehensive dashboard</h6>
+        				<h6 class="text-hijau ina">Analisa secara mendalam dengan dashboard komprehensif kami</h6>
+	        		</div>
+	        		<div class="clearfix"></div>
+	        		<div class="visible-md visible-lg visible-sm">
+		        		<div class="col l11 m11 right-align" style="margin-top:-190px;">
+	        				<img src="/img/info/line.png" width="93%" style="z-index:0; margin-right: -15px">
+	        			</div>
+	        		</div>
+        	</div>
+        </section>
+
+        <section class="row latar-abu-terang" style="margin-top:-21px; padding:70px 0px 80px 0px; min-height: 100vh">
+			<div class="container">
+				<div class="col l12 m12 s12 space-bottom-mid">
+					<h4 class="center font-head text-hijau eng">10 times bang for buck compared to other Out of Home Media options</h4>
+					<h4 class="center font-head text-hijau ina">10 kali lebih efisien dibandingkan opsi-opsi media Out of Home lainnya</h4>
+				</div>
+
+				<div class="col l6 m6 s6 center">
+					<img src="/img/bilboard.jpg" width="60%">
+					<h6 class="font-head text-hijau">Bilboard</h6>
+					<h6 class="grey-text text-darken-3 eng">IDR 150 million / month<br>400-800 K impressions</h6>
+					<h6 class="grey-text text-darken-3 ina">Rp 150 juta/bulan<br>400-800 ribu impresi</h6>
+				</div>
+				<div class="col l6 m6 s6 center">
+					<img src="/img/car.jpg" width="60%">
+					<h6 class="font-head text-hijau eng">20 Cars</h6>
+					<h6 class="font-head text-hijau ina">20 Mobil</h6>
+					<h6 class="grey-text text-darken-3 eng">IDR 150 million/month<br>4-6 million impressions</h6>
+					<h6 class="grey-text text-darken-3 ina">Rp 150 juta / bulan<br>4-6 juta impresi</h6>
+				</div>
+
+			</div>
+		</section>
+
+
+        <section class="row" style="background-image: url('/img/banner_macet.jpg'); background-repeat:no-repeat;background-size:cover; height: 110vh; margin-top:-21px">
+        	<div class="container">
+        		<div class="col l12 m12 s12 center">
+        			<h5 class="space-top white-text light center eng">What Are You Waiting For?</h5>
+        			<h5 class="space-top white-text light center ina">Apa lagi yang anda tunggu-tunggu?</h5>
+					<h4 class="margin-up-min white-text light center eng">Get Started With Klana Today</h4>
+					<h4 class="margin-up-min white-text light center ina">Mulai dengan Klana sekarang</h4>
+					<a href="adv" class="eng"><button class="center btn btn-large latar-orange" style="position: relative; margin-top:20px">Login</button></a>
+					<a href="adv" class="ina"><button class="center btn btn-large latar-orange" style="position: relative; margin-top:20px">Masuk</button></a>
+					<!-- <a href="" class="eng"><button class="center btn btn-large latar-hijau" style="position: relative;  margin-top:20px">Sign up</button></a> -->
+					<!-- <a href="" class="ina"><button class="center btn btn-large latar-hijau" style="position: relative;  margin-top:20px">daftar</button></a> -->
+
+					<div class="clearfix"></div>
+					<div class="col l2 m2 s6 push-m4 push-l5 push-m5 push-s3 center">
+						<img src="/img/putih.png" width="100%" class="center space-top-min">
+					</div>
+
+					<div class="clearfix"></div>
+					<div class="col l2 m2 s6 push-l5 push-s3">
+						<a href="https://www.facebook.com/kelanain/" class="inline"><i class="fa fa-facebook-square fa-2x white-text"></i></a>
+						<a href="https://www.instagram.com/.in/" class="inline"><i class="fa fa-instagram fa-2x white-text"></i></a>
+						<a href="" class="inline"><i class="fa fa-twitter-square fa-2x white-text"></i></a>
+					</div>
+
+					<div class="clearfix"></div>
+					<p class="white-text center">connect@klana.in</p>
+					<p class="white-text center"><b>PT Klana Teknologika</b></p>
+					<h6 class="light white-text">Bellagio Boutique Office OL2-18<br>
+						Jl. Mega Kuningan Barat Kav. E4 No.3, <br>
+						Kuningan Timur, Setiabudi, DKI Jakarta 12950
+					</h6>
+        	</div>
+        </section>
+
+
+
+         <!-- Modal Structure -->
+  <div id="mail" class="modal">
+    <div class="modal-content row" style="padding-top:60px">
+      	<div class="input-field col l6 m6 s12">
+          <input id="name" type="text" class="validate">
+          <label for="name" >Name</label>
+        </div>
+
+        <div class="input-field col l6 m6 s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+
+        <div class="input-field col l12 m12 s12">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Your Message</label>
+        </div>
+
+        <div class="col l12 m12 s12">
+        	<h6>Your mail has been send to : connect@klana.in</h6>
+        </div>
+    </div>
+    <div class="modal-footer" style="padding-right:30px; padding-bottom:30px">
+      <a class="kirim modal-action waves-effect waves-green btn-large space-bottom-min modal-close">Send</a>
+    </div>
+  </div>
+
+
+  	<script type="text/javascript">
+  	 $(document).ready(function() {
+			    $('select').material_select();
+			  });
+
+  	// bahasa intro
+				$(".ina").hide();
+
+				function changeBhs(){
+					if (document.getElementById('selectBhs').value == "ina"){
+					    $('.eng').hide();
+						$('.ina').show();
+					}else if(document.getElementById('selectBhs').value == "eng"){
+						$('.eng').show();
+						$('.ina').hide();
+					}
+				}
+				function changeBhs_mobile(){
+					if (document.getElementById('selectBhs_mobile').value == "ina"){
+					    $('.eng').hide();
+						$('.ina').show();
+					}else if(document.getElementById('selectBhs_mobile').value == "eng"){
+						$('.eng').show();
+						$('.ina').hide();
+					}
+				}
+
+
+			$(document).ready(function(){
+				$('.modal-trigger').leanModal();
+			    // $('ul.tabs').tabs();
+
+
+		 	});
+		</script>
+
+
+	</body>
+</html>
+<!---->

@@ -15,15 +15,15 @@
     <header>
     	<div class="bigcontainer">
     		<div id="logo">
-    			<a href="./">KLANA</a>
+    			<a href="/">KLANA</a>
     		</div>
     		<div class="user">
     			<div class="ui inline labeled icon top right pointing dropdown">
-      			<img class="ui avatar image" src="resource/images/avatar-default.gif">
+      			<img class="ui avatar image" src="/resource/images/avatar-default.gif">
       			<%= user.local.fullName %>
             <i class="dropdown icon"></i>
       				<div class="menu">
-      					<a class="item" href="/logout"><i class="sign out icon"></i>Log Out</a>
+      					<a class="item" href="/admin/logout"><i class="sign out icon"></i>Log Out</a>
       				</div>
     			</div>
     		</div>
@@ -33,7 +33,7 @@
     <div class="ui teal inverted menu">
     	<div class="bigcontainer">
     		<div class="left menu">
-          <a class="active item" href="/home"><i class="desktop icon"></i>Admin</a>
+          <a class="active item" href="/admin/home"><i class="desktop icon"></i>Admin</a>
     		</div>
     	</div>
     </div>
@@ -45,13 +45,13 @@
     			<div class="four wide column">
     				<div class="verticalMenu">
     					<div class="ui vertical pointing menu fluid">
-      						<a class="teal item" href="/home">
+      						<a class="teal item" href="/admin/home">
     							<i class="child icon"></i> Agent
       						</a>
-                  <a class="active teal item" href="/ads">
+                  <a class="active teal item" href="/admin/ads">
     							<i class="address book icon"></i> Advertising
       						</a>
-                  <a class="teal item" href="/subscribers">
+                  <a class="teal item" href="/admin/subscribers">
     							<i class="users icon"></i> Subscriber
       						</a>
     					</div>
@@ -72,7 +72,7 @@
 
             <!-- Content -->
             <div class="ui vertical segment">
-    					<a class="ui red small labeled icon add button" href="./addads"><i class="add icon"></i>Add</a>
+    					<a class="ui red small labeled icon add button" href="/admin/addads"><i class="add icon"></i>Add</a>
                         <!-- <div class="ui small icon input right">
                               <input type="text" placeholder="Search……">
                               <i class="search icon"></i>
@@ -95,8 +95,8 @@
                             <td><a target="_blank" href="<%=ads[i].imageUrl %>"> <img src="<%=ads[i].imageUrl %>" width="250px"/> </a> </td>
                             <td><%=dateCustom[i] %></td>
                             <td>
-                              <a class="ui tiny blue edit button" href="./detailads/<%= ads[i]._id%>"><i class="browser icon"></i>View</a>
-                              <a class="ui tiny basic button" href='./deleteads/<%= ads[i]._id%>'><i class="trash icon"></i>Delete</a>
+                              <a class="ui tiny blue edit button" href="/admin/detailads/<%= ads[i]._id%>"><i class="browser icon"></i>View</a>
+                              <a class="ui tiny basic button" href='/admin/deleteads/<%= ads[i]._id%>'><i class="trash icon"></i>Delete</a>
                             </td>
                       </tr>
                       <%}%>

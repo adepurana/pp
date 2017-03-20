@@ -26,7 +26,7 @@
       			<%= user.local.fullName %>
             <i class="dropdown icon"></i>
       				<div class="menu">
-      					<a class="item" href="/logout"><i class="sign out icon"></i>Log Out</a>
+      					<a class="item" href="/admin/logout"><i class="sign out icon"></i>Log Out</a>
       				</div>
     			</div>
     		</div>
@@ -36,7 +36,7 @@
     <div class="ui teal inverted menu">
     	<div class="bigcontainer">
     		<div class="left menu">
-          <a class="active item" href="/home"><i class="desktop icon"></i>Admin</a>
+          <a class="active item" href="/admin/home"><i class="desktop icon"></i>Admin</a>
     		</div>
     	</div>
     </div>
@@ -48,13 +48,13 @@
     			<div class="four wide column">
     				<div class="verticalMenu">
     					<div class="ui vertical pointing menu fluid">
-                <a class="teal item" href="/home">
+                <a class="teal item" href="/admin/home">
                 <i class="child icon"></i> Agent
                 </a>
-                <a class="active teal item" href="/ads">
+                <a class="active teal item" href="/admin/ads">
                 <i class="address book icon"></i> Advertising
                 </a>
-                <a class="teal item" href="/subscribers">
+                <a class="teal item" href="/admin/subscribers">
                 <i class="users icon"></i> Subscriber
                 </a>
     					</div>
@@ -62,7 +62,7 @@
     			</div>
     			<!--the newDevice form-->
           <div class="twelve wide column">
-            <form name="form" action="/updateads" method="post">
+            <form name="form" action="/admin/updateads" method="post">
     				<div class="pageHeader">
     					<div class="segment">
     						<h3 class="ui dividing header">
@@ -182,7 +182,7 @@
     							</table>
                   <input type="hidden" name="adsId" value="<%= ads._id || ads.adsId %>">
                   <input class="ui small blue submit button" type="submit" value="Update">
-                  <a class="ui small basic button" href="/ads">Back</a>
+                  <a class="ui small basic button" href="/admin/ads">Back</a>
     				</div>
             </form>
             <!-- ========================================== -->

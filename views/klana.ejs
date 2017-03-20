@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+	    <title>Klana</title>
+	    <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
+
+	    <!-- core CSS -->
+	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <link href="/css/materialize.css" rel="stylesheet">
+	    <link href="/css/font-awesome.css" rel="stylesheet">
+	    <!-- <link href="css/nouislider.css" rel="stylesheet"> -->
+	    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.0.0/nouislider.css" rel="stylesheet">
+	    <link href="/css/mystyle-default.css" rel="stylesheet">
+	    <link href="/css/mystyle-edit.css" rel="stylesheet">
+	    <link href="/css/select_edit.css" rel="stylesheet">
+
+
+	    <!-- core JS -->
+	    <script src="/js/jquery.min.js"></script>
+	    <script src="/js/materialize.js"></script>
+			<script src="/js/nouislider.js"></script>
+
+		<style type="text/css">
+
+
+
+		    @font-face {
+            font-family: "com-light";
+            src: url('fonts/gotham_head.otf');
+            }
+
+            .font-head {
+                font-family: "com-light";
+            }
+
+		</style>
+        <style>
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .modal-body {padding: 2px 16px;}
+
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        </style>
+
+	</head>
+	<body class="font-sub">
+	<section class="row" style="background-image:url('/img/banner_aksen.jpg'); background-size:cover; background-repeat: no-repeat; min-height: 100vh">
+
+		<!-- <header class="no-shadow"> -->
+			<div class="navbar-fixed latar-hijau" style="z-index:10; box-shadow: none;">
+			<div class="container">
+				<nav class="latar-hijau no-shadow" style="padding:0px 30px">
+				    <div class="nav-wrapper">
+				    	<div class=" visible-md visible-lg">
+					    	<a href="/" class="brand-logo" style="margin-left:10px"><img src="/img/logo_beta_putih.png" width="100%"></a>
+						    <ul class="right hide-on-med-and-down" style="padding-right: 10px">
+						    	<li><a href="/" class="font-sub text-orange">DRIVER</a></li>
+						    	<li style="margin-right:20px"><a href="/advert" class="font-sub white-text">ADVERTISER</a></li>
+						    	<li class="input-field" style="width: 30px">
+							    	<select id="selectBhs" onChange="changeBhs()">
+							    		<option value="ina">ID</option>
+							    		<option value="eng" selected>EN</option>
+							    	</select>
+						    	</li>
+						    </ul>
+					    </div>
+
+					    <div class="visible-xs visible-sm">
+					    	<a href="/" class="left brand-logo" style="margin-left:-10px"><img src="/img/logo_beta_putih.png" width="85%"></a>
+
+						    <div class="input-field right" style="width: 35px">
+							   <select id="selectBhs_mobile" onChange="changeBhs_mobile()">
+							    	<option value="ina">ID</option>
+							    	<option value="eng" selected>EN</option>
+							    </select>
+						    </div>
+
+						    <div class="right"  style="margin-right:30px">
+						    <a class="dropdown-button" href="#!" data-activates="dropdown1" data-beloworigin="true">MENU<i class="material-icons right" style="margin-left: -2px">arrow_drop_down</i></a>
+						   </div>
+
+					    </div>
+					    <!-- link -->
+						<ul id="dropdown1" class="dropdown-content">
+						  <li><a href="/">Driver</a></li>
+						  <li><a href="/advert">Advertiser</a></li>
+						</ul>
+
+
+
+				    </div>
+				  </nav>
+			</div>
+		<!-- </header> -->
+			</div>
+
+			<div class="container">
+				<div class="col l5 m5 s12 no-padding">
+					<div class="col l12 m12 s12">
+						<h3 class="font-head text-hijau space-top-mid">DRIVE YOUR INCOME.</h3>
+						<h5 class="text-hijau light eng">Make money out of your traffic jams!</h5>
+						<h5 class="text-hijau light 	ina">Dapatkan pendapatan tambahan dari waktu anda bermacet-macetan di jalanan!</h5>
+						<a href="https://goo.gl/forms/QEPWGCOAcWjLyq5x1" class="eng btn-large latar-orange waves-effect waves-orange text-hijau no-shadow" style="border-radius: 5px; padding:0px 20px 10px 20px">Sign Up Now!</a>
+						<a href="https://goo.gl/forms/QEPWGCOAcWjLyq5x1" class="ina btn-large latar-orange waves-effect waves-orange text-hijau no-shadow" style="border-radius: 5px; padding:0px 20px 10px 20px">Daftar di sini</a>
+						<div class="visible-md visible-lg visible-sm">
+							<h6 class="text-hijau light space-top eng">Soon to be available on</h6>
+							<h6 class="text-hijau light space-top ina">Segera tersedia di </h6>
+						</div>
+						<div class="visible-xs">
+							<h6 class="text-hijau light space-top-min">Soon to be available on</h6>
+							<h6 class="text-hijau light space-top-min">Segera tersedia di</h6>
+						</div>
+					</div>
+					<div class="col l3 m3 s6">
+						<img src="/img/playstore.png" width="100%">
+					</div>
+					<div class="col l3 m3 s6">
+						<img src="/img/appstore.png" width="100%">
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="visible-md visible-lg visible-sm">
+					<div class="col l9 m12 right" style="margin-top: -320px">
+						<img src="/img/banner-front.png" width="100%">
+					</div>
+				</div>
+				<div class="visible-xs">
+					<div class="col s12 right" style="margin-top:70px">
+						<img src="/img/banner-front.png" width="100%">
+					</div>
+				</div>
+
+			</div>
+
+		</section>
+
+		<section class="row grey lighten-3 center" style="margin-top:-40px; padding-top: 10px; padding-bottom: 10px">
+        	<div class="container">
+
+        		<p class="grey-text text-darken-3 light center">Trusted By</p>
+
+        		<div class="col l2 m2 s4 push-l3 push-m3 push-s2 center margin-up-min">
+        			<a href="http://www.sandarandara.com" class="opacity"><img src="/img/magale.png" width="80%"></a>
+        			<h6 class="grey-text text-darken-3 margin-up-mid">Magale</h6>
+        		</div>
+        		<div class="col l2 m2 s4 push-l5 push-m5 push-s2 center margin-up-min">
+        			<a href="http://www.olrange.com" class="opacity"><img src="/img/olrange.png" width="80%" ></a>
+        			<h6 class="grey-text text-darken-3 margin-up-mid">Olrange</h6>
+        		</div>
+        	</div>
+        </section>
+
+		<section class="row white" style="margin-top:-21px; padding-bottom: 100px">
+            <div class="container"> <!--container-->
+            	<div class="col l12 m12 s12 space-top-mid space-bottom-min">
+            		<h5 class="light center text-hijau font-head eng">How Much Can I Make?</h5>
+            		<h5 class="light center text-hijau font-head ina">Berapa yang bisa saya dapatkan?</h5>
+                	<h6 class="light center eng">Take a look at how much you can make by driving Klana</h6>
+                	<h6 class="light center ina">Simulasikan berapa uang yang anda bisa dapatkan dengan bergabung bersama Klana</h6>
+            	</div>
+
+            	<div class="visible-lg visible-sm visible-md">
+	            	<div class="col l2 m2">
+	            		<h6 class="center eng"><span class="circle latar-hijau btn-floating no-shadow space-bottom-xs">1</span><br> Daily Mileage</h6>
+	            		<h6 class="center ina"><span class="circle latar-hijau btn-floating no-shadow space-bottom-xs">1</span><br> Jarak tempuh harian anda</h6>
+	            	</div>
+	            	<div class="col l7 m7">
+	            		<h6 class="center eng"><span class="circle latar-hijau btn-floating no-shadow space-bottom-xs">2</span><br> Level of Wrap</h6>
+	            		<h6 class="center ina"><span class="circle latar-hijau btn-floating no-shadow space-bottom-xs">2</span><br> Besar iklan di mobil</h6>
+	            	</div>
+	            	<div class="col l3 m3">
+	            		<h6 class="center eng"><span class="circle latar-hijau btn-floating no-shadow space-bottom-xs">3</span><br>Pay-out per month (Aproximation)</h6>
+	            		<h6 class="center ina"><span class="circle latar-hijau btn-floating no-shadow space-bottom-xs">3</span><br>Estimasi jumlah yang bisa anda dapatkan setiap bulannya </h6>
+	            	</div>
+	            </div>
+
+            	<div class="col l12 m12 s12 space-bottom-sm">
+            		<div class="hr-abu"></div>
+            	</div>
+
+            	<div class="clearfix"></div>
+
+            	<!-- desktop -->
+            	<div class="visible-sm visible-lg visible-md">
+	            	<!-- slider -->
+	            	<div class="col l2 m2 s4">
+	            		<div id="slider-vertical"></div>
+	            	</div>
+
+	            	<!-- preview mobil -->
+	            	<div class="col l7 m7 s8 no-padding">
+							    <div class="col s12 margin-up-mid">
+							      <ul class="tabs white">
+							        <li class="tab col s3"><a class="text-hijau active" href="#test1">Front</a></li>
+							        <li class="tab col s3"><a href="#test2">Side</a></li>
+							        <li class="tab col s3"><a href="#test3">Back</a></li>
+
+							      </ul>
+							    </div>
+							    <div id="test1" class="col s12 center">
+							    	<img src="/img/campaign/1.png" class="center" align="middle" width="70%" id="t1">
+							    	<img src="/img/campaign/11.png" class="center" align="middle" width="70%" id="t2">
+							    	<img src="/img/campaign/111.png" class="center" align="middle" width="70%" id="t3">
+							    </div>
+							    <div id="test2" class="col s12 center">
+							    	<img src="/img/campaign/2.png" class="center" align="middle" width="70%" id="s1">
+							    	<img src="/img/campaign/22.png" class="center" align="middle" width="70%" id="s2">
+							    	<img src="/img/campaign/222.png" class="center" align="middle" width="70%" id="s3">
+							    	</div>
+							    <div id="test3" class="col s12 center">
+							    	<img src="/img/campaign/3.png" class="center" align="middle" width="70%" id="o1">
+							    	<img src="/img/campaign/33.png" class="center" align="middle" width="70%" id="o2">
+							    	<img src="/img/campaign/333.png" class="center" align="middle" width="70%" id="o3">
+							    </div>
+
+
+
+						    <div class="clearfix"></div>
+						    <div class="hr-abu"></div>
+						    <div class="col l4 m4 s4 center">
+						    	<img src="/img/campaign/p_1.png" width="100%">
+						    	<p>
+							      <input type="checkbox" class="filled-in chb cek1" id="filled-in-box" values="1"  name="chb[]"/>
+							      <label for="filled-in-box">Rear Wrap</label>
+							    </p>
+						    </div>
+						    <div class="col l4 m4 s4 center">
+						    	<img src="/img/campaign/p_2.png" width="100%">
+						    	<p>
+							      <input type="checkbox" class="filled-in chb" id="filled-in-box2" values="2" checked="checked" name="chb[]" />
+							      <label for="filled-in-box2">Side Wrap</label>
+							    </p>
+						    </div>
+						    <div class="col l4 m4 s4 center">
+						    	<img src="/img/campaign/p_3.png" width="100%">
+						    	<p>
+							      <input type="checkbox" class="filled-in chb" id="filled-in-box3" values="3" name="chb[]" />
+							      <label for="filled-in-box3">Full Wrap</label>
+							    </p>
+						    </div>
+	            	</div>
+
+	            	<!-- nominal -->
+	            	<div class="col l3 m3 s12 center">
+	            		<span class="material-icons center-align text-orange" style="font-size: 60px">redeem</span>
+	            		<h3 id="money" class="center-align text-hijau" style="font-size:50px"><b>IDR<span id="valAwal">1300</span>K <br><small class="light eng">up to</small><small class="light ina">hingga</small><br> IDR<span id="valAkhir">1950</span>K</b></h3>
+	            		<input id="coba" type="hidden">
+	            		<h3 id="coba1"></h3>
+	            	</div>
+
+            	</div>
+
+
+            	<!-- mobile -->
+            	<div class="visible-xs">
+
+	            	<!-- preview mobil -->
+	            	<div class="col s12 no-padding">
+						    <div class="col s12 margin-up-mid">
+						      <ul class="tabs latar-abu-terang">
+						        <li class="tab col s3"><a class="text-hijau active" href="#test_a1">Front</a></li>
+						        <li class="tab col s3"><a href="#test_a2">Side</a></li>
+						        <li class="tab col s3"><a href="#test_a3">Back</a></li>
+
+						      </ul>
+						    </div>
+						    <div id="test_a1" class="col s12 center">
+						    	<img src="/img/campaign/1.png" class="center" align="middle" width="70%" id="tt1">
+							    <img src="/img/campaign/11.png" class="center" align="middle" width="70%" id="tt2">
+							    <img src="/img/campaign/111.png" class="center" align="middle" width="70%" id="tt3">
+						    </div>
+						    <div id="test_a2" class="col s12 center">
+						    	<img src="/img/campaign/2.png" class="center" align="middle" width="70%" id="ss1">
+							    <img src="/img/campaign/22.png" class="center" align="middle" width="70%" id="ss2">
+							    <img src="/img/campaign/222.png" class="center" align="middle" width="70%" id="ss3">
+						    </div>
+						    <div id="test_a3" class="col s12 center">
+						    	<img src="/img/campaign/3.png" class="center" align="middle" width="70%" id="oo1">
+							    <img src="/img/campaign/33.png" class="center" align="middle" width="70%" id="oo2">
+							    <img src="/img/campaign/333.png" class="center" align="middle" width="70%" id="oo3">
+						    </div>
+						    <div class="clearfix"></div>
+						    <div class="hr-abu"></div>
+						    <div class="col l4 m4 s4 center">
+						    	<img src="/img/campaign/p_1.png" width="100%">
+						    	<p>
+							      <input type="checkbox" class="filled-in chb_a" id="filled-in-box_a1" values="1"  name="chb_a[]"/>
+							      <label for="filled-in-box_a1">Rear Wrap</label>
+							    </p>
+						    </div>
+						    <div class="col l4 m4 s4 center">
+						    	<img src="/img/campaign/p_2.png" width="100%">
+						    	<p>
+							      <input type="checkbox" class="filled-in chb_a" id="filled-in-box_a2" values="2" name="chb_a[]" checked="checked"/>
+							      <label for="filled-in-box_a2">Side Wrap</label>
+							    </p>
+						    </div>
+						    <div class="col l4 m4 s4 center">
+						    	<img src="/img/campaign/p_3.png" width="100%">
+						    	<p>
+							      <input type="checkbox" class="filled-in chb_a" id="filled-in-box_a3" values="3" name="chb_a[]"/>
+							      <label for="filled-in-box_a3">Full Wrap</label>
+							    </p>
+						    </div>
+	            	</div>
+
+	            	<div class="clearfix"></div>
+
+	            	<!-- slider -->
+	            	<div class="col s5 center space-top-min">
+	            		<div id="slider-vertical_a"></div>
+	            	</div>
+
+	            	<!-- nominal -->
+	            	<div class="col s7 center space-top-mid">
+	            		<span class="material-icons center-align text-orange" style="font-size: 40px">redeem</span>
+	            		<h4 id="money" class="center-align text-hijau" style="font-size:30px"><b>IDR<span id="valAwal_a">1300</span>K <br><small class="light eng">up to</small><small class="light ina">hingga</small><br> IDR<span id="valAkhir_a">1950</span>K</b></h4>
+	            		<input id="coba" type="hidden">
+	            		<h4 id="coba1"></h4>
+	            	</div>
+
+            	</div>
+
+
+
+
+            </div> <!-- end container -->
+        </section> <!--end section-->
+
+        <section class="row" style="margin-top:-21px;min-height: 100vh; padding:90px 0px 50px 0px; background-image:url('/img/banner_aksen2.jpg'); background-size: cover; background-repeat:no-repeat; ">
+        	<div class="container">
+        	<!-- <div class="col l10 m10 s12 push-l1 push-m1"> -->
+        		<div class="col l12 m12 s12 space-bottom-mid">
+        			<h4 class="text-hijau font-head">DRIVE YOUR INCOME</h4>
+        			<h5 class="text-hijau margin-up-min eng">Make Extra Money by Driving Ad</h5>
+        			<h5 class="text-hijau margin-up-min ina">Dapatkan lebih banyak penghasilan dengan klana</h5>
+        		</div>
+        		<div class="clearfix"></div>
+
+
+        		<div class="col l2 m2 s6 center space-bottom-xs">
+        			<img src="/img/info/d_1.png" width="80%" style="z-index: 100">
+        			<div class="visible-lg visible-sm visible-md">
+        				<h6 class="font-head text-hijau eng"><b>SIGN UP</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>DAFTAR</b></h6>
+        			</div>
+        			<div class="visible-xs">
+        				<h6 class="font-head text-hijau eng"><b>1. SIGN UP</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>1. DAFTAR</b></h6>
+        			</div>
+        			<h6 class="text-hijau eng">Sign up with Klana</h6>
+        			<h6 class="text-hijau ina">Daftar dengan Klana</h6>
+        		</div>
+        		<div class="col l2 m2 s6 center  space-bottom-xs">
+        			<img src="/img/info/d_2.png" width="80%" style="z-index: 100">
+        			<div class="visible-lg visible-sm visible-md">
+        				<h6 class="font-head text-hijau eng"><b>DRIVE</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>BERKENDARA</b></h6>
+        			</div>
+        			<div class="visible-xs">
+        				<h6 class="font-head text-hijau eng"><b>2. DRIVE</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>2. BERKENDARA</b></h6>
+        			</div>
+        			<h6 class="text-hijau eng">Drive your normal daily commute for 3 days</h6>
+        			<h6 class="text-hijau ina">Menyetir dengan rutinitas harian anda selama 3 hari</h6>
+        		</div>
+        		<div class="col l2 m2 s6 center  space-bottom-xs">
+        			<img src="/img/info/d_3.png" width="80%" style="z-index: 100">
+        			<div class="visible-lg visible-sm visible-md">
+        				<h6 class="font-head text-hijau eng"><b>START</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>MULAI</b></h6>
+        			</div>
+        			<div class="visible-xs">
+        				<h6 class="font-head text-hijau eng"><b>3. START</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>3. MULAI</b></h6>
+        			</div>
+        			<h6 class="text-hijau eng">View available campaign offer suited for you and start driving</h6>
+        			<h6 class="text-hijau ina">Lihat campaign-campaign yang tersedia dan mulai berkendara dengan iklan yang cocok</h6>
+        		</div>
+        		<div class="col l2 m2 s6 center  space-bottom-xs">
+        			<img src="/img/info/d_4.png" width="80%" style="z-index: 100">
+        			<div class="visible-lg visible-sm visible-md">
+        				<h6 class="font-head text-hijau eng"><b>TRAFFIC JAM?</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>MACET?</b></h6>
+        			</div>
+        			<div class="visible-xs">
+        				<h6 class="font-head text-hijau eng"><b>4. TRAFFIC JAM?</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>4. MACET?</b></h6>
+        			</div>
+        			<h6 class="text-hijau eng">Get paid more!</h6>
+        			<h6 class="text-hijau ina">Dapatkan lebih banyak</h6>
+        		</div>
+        		<div class="visible-xs">
+        			<div class="clearfix"></div>
+        		</div>
+        		<div class="col l2 m2 s6 center  space-bottom-xs">
+        			<img src="/img/info/d_5.png" width="80%" style="z-index: 100">
+        			<div class="visible-lg visible-sm visible-md">
+        				<h6 class="font-head text-hijau eng"><b>TRACK</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>PANTAU</b></h6>
+        			</div>
+        			<div class="visible-xs">
+        				<h6 class="font-head text-hijau eng"><b>5. TRACK</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>5. PANTAU</b></h6>
+        			</div>
+        			<h6 class="text-hijau eng">Track minutes driven and earnings real-time</h6>
+        			<h6 class="text-hijau ina">Ketahui jumlah uang yang anda telah dapatkan secara real time</h6>
+        		</div>
+        		<div class="col l2 m2 s6 center  space-bottom-xs">
+        			<img src="/img/info/d_6.png" width="80%" style="z-index: 100">
+        			<div class="visible-lg visible-sm visible-md">
+        				<h6 class="font-head text-hijau eng"><b>GET PAID</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>DAPAT UANG</b></h6>
+        			</div>
+        			<div class="visible-xs">
+        				<h6 class="font-head text-hijau eng"><b>6. GET PAID</b></h6>
+        				<h6 class="font-head text-hijau ina"><b>6. DAPAT UANG</b></h6>
+        			</div>
+        			<h6 class="text-hijau eng">Automated payment straight to your bank account</h6>
+        			<h6 class="text-hijau ina">Pendebetan uang ke rekening anda secara otomatis</h6>
+        		</div>
+
+
+        		<div class="clearfix"></div>
+        		<div class="visible-sm visible-lg visible-md">
+        			<div class="col l12 m12 right-align" style="margin-top:-210px;">
+        				<img src="/img/info/line.png" width="93%" style="z-index:0; margin-right: -15px">
+        			</div>
+        		</div>
+        	<!-- </div> -->
+        	</div>
+        </section>
+
+
+
+        <section class="row" style="background-image: url('/img/banner_macet.jpg'); background-repeat:no-repeat;background-size:cover; height: 110vh; margin-top:-21px">
+        	<div class="container">
+        		<div class="col l12 m12 s12 center">
+        			<h5 class="space-top white-text light center eng">What Are You Waiting For?</h5>
+        			<h5 class="space-top white-text light center ina">Apa lagi yang anda tunggu-tunggu?</h5>
+					<h4 class="margin-up-min white-text light center eng">Get Started With Klana Today</h4>
+					<h4 class="margin-up-min white-text light center ina">Mulai dengan Klana sekarang</h4>
+					<a href="driver" class="eng"><button class="center btn btn-large latar-orange" style="position: relative; margin-top:20px">Login</button></a>
+					<a href="driver" class="ina"><button class="center btn btn-large latar-orange" style="position: relative; margin-top:20px">Masuk</button></a>
+					<!-- <a href="https://goo.gl/forms/QEPWGCOAcWjLyq5x1" class="eng"><button class="center btn btn-large latar-hijau" style="position: relative;  margin-top:20px">Sign up</button></a> -->
+					<!-- <a href="https://goo.gl/forms/QEPWGCOAcWjLyq5x1" class="ina"><button class="center btn btn-large latar-hijau" style="position: relative;  margin-top:20px">Daftar</button></a> -->
+
+					<div class="clearfix"></div>
+					<div class="col l2 m2 s6 push-m4 push-l5 push-m5 push-s3 center">
+						<img src="/img/putih.png" width="100%" class="center space-top-min">
+					</div>
+
+					<div class="clearfix"></div>
+					<div class="col l2 m2 s6 push-l5 push-s3">
+						<a href="https://www.facebook.com/kelanain/" class="inline"><i class="fa fa-facebook-square fa-2x white-text"></i></a>
+						<a href="https://www.instagram.com/klana.in/" class="inline"><i class="fa fa-instagram fa-2x white-text"></i></a>
+						<a href="https://www.twitter.com/klanain/" class="inline"><i class="fa fa-twitter-square fa-2x white-text"></i></a>
+					</div>
+
+					<div class="clearfix"></div>
+					<p class="white-text center">connect@klana.in</p>
+					<p class="white-text center"><b>PT Klana Teknologika</b></p>
+					<h6 class="light white-text">Bellagio Boutique Office OL2-18<br>
+						Jl. Mega Kuningan Barat Kav. E4 No.3, <br>
+						Kuningan Timur, Setiabudi, DKI Jakarta 12950
+					</h6>
+        	</div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+		<script type="text/javascript">
+			  $(document).ready(function() {
+			    $('select').material_select();
+			  });
+
+				// bahasa intro
+				$(".ina").hide();
+
+				function changeBhs(){
+					if (document.getElementById('selectBhs').value == "ina"){
+					    $('.eng').hide();
+						$('.ina').show();
+					}else if(document.getElementById('selectBhs').value == "eng"){
+						$('.eng').show();
+						$('.ina').hide();
+					}
+				}
+				function changeBhs_mobile(){
+					if (document.getElementById('selectBhs_mobile').value == "ina"){
+					    $('.eng').hide();
+						$('.ina').show();
+					}else if(document.getElementById('selectBhs_mobile').value == "eng"){
+						$('.eng').show();
+						$('.ina').hide();
+					}
+				}
+
+			$(document).ready(function(){
+				$('.modal-trigger').leanModal();
+			    $('ul.tabs').tabs();
+
+		 	});
+
+		</script>
+
+
+		<script type="text/javascript">
+		// desktop
+			var verticalSlider = document.getElementById('slider-vertical');
+
+			verticalSlider.style.height = '470px';
+			verticalSlider.style.margin = '0 auto 30px';
+
+
+			noUiSlider.create(verticalSlider, {
+				start: 50,
+				tooltips: true,
+				connect: [true,false],
+				direction: 'rtl',
+				// snap:true,
+				orientation: 'vertical',
+				range: {
+					'min': 0,
+					'max': 100
+				},
+				pips: { // Show a scale with the slider
+					mode: 'steps',
+					stepped: true,
+					density: 4
+				}
+			});
+
+
+		// mobile
+		var m_verticalSlider = document.getElementById('slider-vertical_a');
+
+			m_verticalSlider.style.height = '270px';
+			m_verticalSlider.style.margin = '0 auto 30px';
+
+
+			noUiSlider.create(m_verticalSlider, {
+				start: 50,
+				tooltips: true,
+				connect: [true,false],
+				direction: 'rtl',
+				// snap:true,
+				orientation: 'vertical',
+				range: {
+					'min': 0,
+					'max': 100
+				},
+				pips: { // Show a scale with the slider
+					mode: 'steps',
+					stepped: true,
+					density: 4
+				}
+			});
+
+
+
+        var a=1;
+        var b=1;
+
+
+            // $(document).ready(function () {
+                $('.parallax').parallax();
+                $('.modal-trigger').leanModal();
+
+               // desktop
+                verticalSlider.noUiSlider.on('update', function( values, handle ) {
+					selectOne(values[0]);
+					a = values[0];
+				});
+
+				// mobile
+                m_verticalSlider.noUiSlider.on('update', function( values, handle ) {
+					selectOne_a(values[0]);
+					b = values[0];
+				});
+
+
+                // desktop
+                // $(document).ready{
+                	$('#t1').hide();
+                	$('#t3').hide();
+
+                	$('#s1').hide();
+                	$('#s3').hide();
+
+                	$('#o1').hide();
+                	$('#o3').hide();
+
+                	$('#tt1').hide();
+                	$('#tt3').hide();
+
+                	$('#ss1').hide();
+                	$('#ss3').hide();
+
+                	$('#oo1').hide();
+                	$('#oo3').hide();
+                // }
+
+
+                 $(".chb").change(function() {
+				    $(".chb").prop('checked', false);
+				    $(this).prop('checked', true);
+        			selectOne(a);
+				});
+
+
+                $("#filled-in-box").on('click', function(){
+    				$('#t1').show();
+				    $('#t2').hide();
+				    $('#t3').hide();
+
+				    $('#s1').show();
+				    $('#s2').hide();
+				    $('#s3').hide();
+
+				    $('#o1').show();
+				    $('#o2').hide();
+				    $('#o3').hide();
+				});
+				$("#filled-in-box2").on('click', function(){
+    				$('#t1').hide();
+				    $('#t2').show();
+				    $('#t3').hide();
+
+				    $('#s1').hide();
+				    $('#s2').show();
+				    $('#s3').hide();
+
+				    $('#o1').hide();
+				    $('#o2').show();
+				    $('#o3').hide();
+				});
+				$("#filled-in-box3").on('click', function(){
+    				$('#t1').hide();
+				    $('#t2').hide();
+				    $('#t3').show();
+
+				    $('#s1').hide();
+				    $('#s2').hide();
+				    $('#s3').show();
+
+				    $('#o1').hide();
+				    $('#o2').hide();
+				    $('#o3').show();
+				});
+
+
+
+
+				// mobile
+                 $(".chb_a").change(function() {
+				    $(".chb_a").prop('checked', false);
+				    $(this).prop('checked', true);
+        			selectOne_a(b);
+				});
+
+                 // mobile
+				 $("#filled-in-box_a1").on('click', function(){
+    				$('#tt1').show();
+				    $('#tt2').hide();
+				    $('#tt3').hide();
+
+				    $('#ss1').show();
+				    $('#ss2').hide();
+				    $('#ss3').hide();
+
+				    $('#oo1').show();
+				    $('#oo2').hide();
+				    $('#oo3').hide();
+				});
+				$("#filled-in-box_a2").on('click', function(){
+    				$('#tt1').hide();
+				    $('#tt2').show();
+				    $('#tt3').hide();
+
+				    $('#ss1').hide();
+				    $('#ss2').show();
+				    $('#ss3').hide();
+
+				    $('#o1').hide();
+				    $('#o2').show();
+				    $('#o3').hide();
+				});
+				$("#filled-in-box_a3").on('click', function(){
+    				$('#tt1').hide();
+				    $('#tt2').hide();
+				    $('#tt3').show();
+
+				    $('#ss1').hide();
+				    $('#ss2').hide();
+				    $('#ss3').show();
+
+				    $('#oo1').hide();
+				    $('#oo2').hide();
+				    $('#oo3').show();
+				});
+
+            function selectOne(sliderVal){
+                var checkedValue = null;
+				var inputElements = document.getElementsByClassName('chb');
+				for(var i=0; inputElements[i]; ++i){
+				      if(inputElements[i].checked){
+				           checkedValue = inputElements[i].value;
+				           cbVal = i;
+				           setValueAwalAkhir(i, sliderVal);
+				           break;
+				      }
+				}
+            }
+
+            function setValueAwalAkhir(checkVal, sliderVal){
+            	var hargaAw = (checkVal+1)*13*sliderVal;
+                var hargaAk = (checkVal+1)*13*sliderVal*1.5;
+                $("#valAwal").text(Math.round(hargaAw));
+                $("#valAkhir").text(Math.round(hargaAk));
+            }
+
+
+            function selectOne_a(sliderVal_a){
+                var checkedValue_a = null;
+				var inputElements_a = document.getElementsByClassName('chb_a');
+				for(var i=0; inputElements_a[i]; ++i){
+				      if(inputElements_a[i].checked){
+				           checkedValue_a = inputElements_a[i].value;
+				           cbVal_a = i;
+				           setValueAwalAkhir_a(i, sliderVal_a);
+				           break;
+				      }
+				}
+            }
+
+            function setValueAwalAkhir_a(checkVal_a, sliderVal_a){
+            	var hargaAw_a = (checkVal_a+1)*13*sliderVal_a;
+                var hargaAk_a = (checkVal_a+1)*13*sliderVal_a*1.5;
+                $("#valAwal_a").text(Math.round(hargaAw_a));
+                $("#valAkhir_a").text(Math.round(hargaAk_a));
+            }
+
+
+
+        </script>
+
+
+
+	</body>
+</html>
+<!---->
