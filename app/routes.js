@@ -10,7 +10,7 @@ module.exports = function(app, passport) {
     // Agents
     app.get('/', homeController.home);
     app.get('/advert', homeController.advert);
-    
+
     app.get('/admin/addagents', isLoggedIn, agentController.addAgentDisplay);
     app.post('/admin/addagents', isLoggedIn, agentController.insert);
     app.get('/admin/agents/:id', isLoggedIn, agentController.detail);
@@ -69,16 +69,16 @@ module.exports = function(app, passport) {
 
         // SIGNUP =================================
         // show the signup form
-        app.get('/admin/signup', function(req, res) {
-            res.render('signup.ejs', { message: req.flash('signupMessage') });
-        });
+        // app.get('/admin/signup', function(req, res) {
+        //     res.render('signup.ejs', { message: req.flash('signupMessage') });
+        // });
 
         // process the signup form
-        app.post('/admin/signup', passport.authenticate('local-signup', {
-            successRedirect : '/admin/home', // redirect to the secure home section
-            failureRedirect : '/admin/signup', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
-        }));
+        // app.post('/admin/signup', passport.authenticate('local-signup', {
+        //     successRedirect : '/admin/home', // redirect to the secure home section
+        //     failureRedirect : '/admin/signup', // redirect back to the signup page if there is an error
+        //     failureFlash : true // allow flash messages
+        // }));
 
 // =============================================================================
 // AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
