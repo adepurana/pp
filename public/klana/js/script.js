@@ -4,17 +4,17 @@
 	// Create a countdown instance. Change the launchDay according to your needs.
 	// The month ranges from 0 to 11. I specify the month from 1 to 12 and manually subtract the 1.
 	// Thus the launchDay below denotes 7 May, 2014.
-	
-var newYear = new Date(); 
+
+var newYear = new Date();
 newYear = new Date(2015, 12-1, 25);
-$('.defaultCountdown').countdown({until: newYear, format: 'DHMS'}); 
+$('.defaultCountdown').countdown({until: newYear, format: 'DHMS'});
 
 
 
 
 /* ==============================================
 	For Tooltip.
-=====================================================================*/	
+=====================================================================*/
 
 $(function(){
      $('[data-rel="tooltip"]').tooltip();
@@ -22,13 +22,13 @@ $(function(){
 
 /* ==============================================
 	For WOW Animation.
-=====================================================================*/	
+=====================================================================*/
 $(document).ready( function() {
  new WOW().init();
 
 /* ==============================================
 	For Smooth Scroll.
-=====================================================================*/	
+=====================================================================*/
       var $stupid = $('<div></div>')
         .height(1)
         .hide()
@@ -44,33 +44,20 @@ $(document).ready( function() {
       $('ul.mainnav a').smoothScroll({
         afterScroll: mobileHack
       });
-	
-	
-	
-/* ==============================================
-	For Fixed Menu.
-=====================================================================*/		
-var s = $("#stick_menu");
-    var pos = s.position();                                     
-    $(window).scroll(function() {
-        var windowpos = $(window).scrollTop();
-        if (windowpos >= pos.top) {
-            s.addClass("stick_menu");
-        } else {
-            s.removeClass("stick_menu");
-        }
-    });
+
+
+
 
 /* ==============================================
 	Remove Full Screen Image in Mobile view.
-=====================================================================*/			
+=====================================================================*/
 if ($(window).width() < 514) {
      $('#head').removeClass('intro');
 	  $('#head').css('height', 'auto')
 } else {
 	$('#head').addClass('intro');
-   
-}	
+
+}
 
 $(window).resize(function() {
     if ($(window).width() < 1050) {
@@ -80,12 +67,12 @@ $(window).resize(function() {
 	$('#head').addClass('intro');
     }
 }).resize();
-	
-	
+
+
 /* ==============================================
 	For Full Screen Header Part.
-=====================================================================*/		
-	
+=====================================================================*/
+
 		"use strict";
 
 		var winHeight = $(window).height();
@@ -115,12 +102,12 @@ $(window).resize(function() {
 				});
 			};
 		});
-		
+
 /* ==============================================
 	For Customize Scroll Bar Part.
-=====================================================================*/				
-		
-	var nice = jQuery("html").niceScroll({scrollspeed:100,}).hide();;		
-		
-		
-	});    
+=====================================================================*/
+
+	var nice = jQuery("html").niceScroll({scrollspeed:100,}).hide();;
+
+
+	});
