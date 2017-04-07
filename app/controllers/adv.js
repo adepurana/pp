@@ -13,6 +13,7 @@ module.exports = {
 }
 
 function addSubscriber(req,res,next){
+  console.log(req.body);
   if(req.body.adsId!='all'){
     Ads.findById(req.body.adsId).exec(function(err,ads){
       if(err)throw err
@@ -20,6 +21,7 @@ function addSubscriber(req,res,next){
         fullName:req.body.fullName,
         phoneNo:req.body.phoneNo,
         email:req.body.email,
+        note:req.body.note,
         adsId:ads._id,
         vendor:ads.vendor,
         dtCreated:Date.now()
@@ -27,7 +29,7 @@ function addSubscriber(req,res,next){
       subscriber.save(function(err,subs){
         if(err) throw err
       })
-      res.redirect(`/adv/${req.body.nickName}`)
+      res.redirect(`/${req.body.nickName}`)
     })
   }
   else{
@@ -35,6 +37,7 @@ function addSubscriber(req,res,next){
       fullName:req.body.fullName,
       phoneNo:req.body.phoneNo,
       email:req.body.email,
+      note:req.body.note,
       adsId:req.body.adsId,
       vendor:'All',
       dtCreated:Date.now()
@@ -42,7 +45,7 @@ function addSubscriber(req,res,next){
     subscriber.save(function(err,subs){
       if(err) throw err
     })
-    res.redirect(`/adv/${req.body.nickName}`)
+    res.redirect(`/${req.body.nickName}`)
   }
 }
 

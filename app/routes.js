@@ -30,7 +30,7 @@ module.exports = function(app, passport) {
 
 
     app.get('/v/:id', advController.getAdvByVoucherId);
-    app.post('/addSubscriber', advController.addSubscriber);
+    app.post('/admin/addSubscriber', advController.addSubscriber);
 
 
     // show the home page (will also have our login links)

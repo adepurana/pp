@@ -13,7 +13,6 @@ module.exports = {
 function getAll(req,res,next){
   var vendorList = []
   Subscriber.find().sort({"vendor":"asc","dtCreated":"asc"}).exec(function(err,subscribers){
-
           res.render('subscriber',{
             user : req.user,
             subscribers : subscribers
