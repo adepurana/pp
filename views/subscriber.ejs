@@ -79,6 +79,7 @@
                         <th>Full Name</th>
         								<th>Phone No.</th>
                         <th>Email</th>
+                        <th>Note</th>
                         <th>Date Created</th>
       									</tr>
     								</thead>
@@ -89,6 +90,7 @@
           									<td><%=subscribers[i].fullName %></td>
                             <td><%=subscribers[i].phoneNo %></td>
                             <td><%=subscribers[i].email %></td>
+                            <td><%=subscribers[i].note %></td>
                             <td><%=subscribers[i].dtCreated.toString().substring(4,15) %></td>
         							</tr>
                       <%}%>
