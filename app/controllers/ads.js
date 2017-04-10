@@ -4,6 +4,7 @@ const moment = require('moment')
 var Ads = require('../models/ads')
 var Agent = require('../models/agent')
 var AdsAgent = require('../models/adsagent')
+var RealAdsAgent = require('../models/adsagent')
 var Subscriber = require('../models/subscriber')
 
 module.exports = {
@@ -20,6 +21,9 @@ module.exports = {
 
 function updateAds(req,res,next){
   var message = []
+  var adsAgentPromoCodeList = []
+  var tempAdsAgentPromoCodeList = []
+
   if(validator.isEmpty(req.body.vendor))message.push('Vendor is mandatory field')
   if(validator.isEmpty(req.body.imageUrl))message.push('Banner URL is mandatory field')
   if(validator.isEmpty(req.body.dtExpiry))message.push('Expired Date is mandatory field')
@@ -41,18 +45,29 @@ function updateAds(req,res,next){
 
       Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
         if(err)throw err
-        AdsAgent.find({},'-_id agentId').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
+        AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
           for(var i=0;i<adsAgentList.length;i++){
             adsAgentIDList.push(adsAgentList[i].agentId)
+            tempAdsAgentPromoCodeList.push(adsAgentList[i].promoCode)
           }
+
           for(var i=0;i<agentList.length;i++){
+            if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
+              adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+              flag+=1
+            }
+            else{
+              adsAgentPromoCodeList.push(agentList[i].nickName)
+            }
             for(var j=0;j<adsAgentIDList.length;j++){
               if(adsAgentIDList[j]==(agentList[i]._id)){
                 agentList[i].isTicked=true
               }
             }
           }
+          console.log('masuk sini 4');
           res.render('adsDetail',{
+            adsAgentPromoCodeList : adsAgentPromoCodeList,
             agentList : agentList,
             dtExpiryCustom : req.body.dtExpiry,
             message : message,
@@ -64,6 +79,7 @@ function updateAds(req,res,next){
     })
   }
   else{
+    //pass first validations
     if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(req.body.dtExpiry))message.push('Date Expiry format is not correct')
     else{
       var year = req.body.dtExpiry.substring(6,10)
@@ -89,18 +105,28 @@ function updateAds(req,res,next){
 
         Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
           if(err)throw err
-          AdsAgent.find({},'-_id agentId').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
+          AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
             for(var i=0;i<adsAgentList.length;i++){
               adsAgentIDList.push(adsAgentList[i].agentId)
+              tempAdsAgentPromoCodeList.push(adsAgentList[i].promoCode)
             }
             for(var i=0;i<agentList.length;i++){
+              if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
+                adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+                flag+=1
+              }
+              else{
+                adsAgentPromoCodeList.push(agentList[i].nickName)
+              }
               for(var j=0;j<adsAgentIDList.length;j++){
                 if(adsAgentIDList[j]==(agentList[i]._id)){
                   agentList[i].isTicked=true
                 }
               }
             }
+            console.log('masuk sini 5');
             res.render('adsDetail',{
+              adsAgentPromoCodeList : adsAgentPromoCodeList,
               agentList : agentList,
               dtExpiryCustom : req.body.dtExpiry,
               message : message,
@@ -112,6 +138,10 @@ function updateAds(req,res,next){
       })
     }//if(message.length>0){
     else{
+      // pass all validation
+      var promoCodeArray = req.body.promoCode
+      var flag = 0
+      console.log('ARI ADIPRANA', promoCodeArray);
       var tomorrow = new Date(req.body.dtExpiry)
       Ads.findOneAndUpdate({_id:req.body.adsId},
         {$set:
@@ -163,18 +193,28 @@ function updateAds(req,res,next){
                                 AdsAgent.find({}).where('voucherId').equals(req.body.adsId).remove().exec();
                                 Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
                                   if(err)throw err
-                                  AdsAgent.find({},'-_id agentId').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
+                                  AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
                                     for(var i=0;i<adsAgentList.length;i++){
                                       adsAgentIDList.push(adsAgentList[i].agentId)
+                                      tempAdsAgentPromoCodeList.push(adsAgentList[i].promoCode)
                                     }
                                     for(var i=0;i<agentList.length;i++){
+                                      if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
+                                        adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+                                        flag+=1
+                                      }
+                                      else{
+                                        adsAgentPromoCodeList.push(agentList[i].nickName)
+                                      }
                                       for(var j=0;j<adsAgentIDList.length;j++){
                                         if(adsAgentIDList[j]==(agentList[i]._id)){
                                           agentList[i].isTicked=true
                                         }
                                       }
                                     }
+                                    console.log('masuk sini 1');
                                     res.render('adsDetail',{
+                                      adsAgentPromoCodeList : adsAgentPromoCodeList,
                                       agentList : agentList,
                                       dtExpiryCustom : dtExpiryCustom,
                                       message : '',
@@ -211,18 +251,23 @@ function updateAds(req,res,next){
                                             AdsAgent.findOneAndUpdate({agentId:parse[0],voucherId:req.body.adsId},
                                               {$set:
                                                 {
+                                                  promoCode: promoCodeArray[flag],
                                                   vendor:req.body.vendor,
                                                   imageUrl:req.body.imageUrl,
                                                   dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
-                                                }}, function(err,items){})
-                                                console.log('need update',parse[0]);
+                                                }}, function(err,adsAgentItem){
+                                                  if(err)throw err
+                                                  console.log('need update',parse[0]);
+                                                  console.log('items',adsAgentItem);
+                                                })
+
                                           }
                                           else if(parse[0]==preAgentListArray[k]._id&&!preAgentListArray[k].isTicked){
                                             //need insert
                                             adsAgentItem = new AdsAgent({
                                               agentId:parse[0],
                                               voucherId:req.body.adsId,
-                                              promoCode:parse[1],
+                                              promoCode:promoCodeArray[flag],
                                               counter:0,
                                               vendor:req.body.vendor,
                                               imageUrl:req.body.imageUrl,
@@ -241,21 +286,34 @@ function updateAds(req,res,next){
                                             console.log('need delete',preAgentListArray[k]._id);
                                           }
                                         }
+                                        //penting buat update promo code
+                                        flag+=1
                                       }
+                                      flag=0
                                     Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
                                       if(err)throw err
-                                      AdsAgent.find({},'-_id agentId').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
+                                      AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
                                         for(var i=0;i<adsAgentList.length;i++){
                                           adsAgentIDList.push(adsAgentList[i].agentId)
+                                          tempAdsAgentPromoCodeList.push(adsAgentList[i].promoCode)
                                         }
                                         for(var i=0;i<agentList.length;i++){
+                                          if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
+                                            adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+                                            flag+=1
+                                          }
+                                          else{
+                                            adsAgentPromoCodeList.push(agentList[i].nickName)
+                                          }
                                           for(var j=0;j<adsAgentIDList.length;j++){
                                             if(adsAgentIDList[j]==(agentList[i]._id)){
                                               agentList[i].isTicked=true
                                             }
                                           }
                                         }
+                                        console.log('masuk sini 2');
                                         res.render('adsDetail',{
+                                          adsAgentPromoCodeList : adsAgentPromoCodeList,
                                           agentList : agentList,
                                           dtExpiryCustom : dtExpiryCustom,
                                           message : '',
@@ -350,18 +408,28 @@ function updateAds(req,res,next){
                                   // ======
                                   Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
                                     if(err)throw err
-                                    AdsAgent.find({},'-_id agentId').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
+                                    AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
                                       for(var i=0;i<adsAgentList.length;i++){
                                         adsAgentIDList.push(adsAgentList[i].agentId)
+                                        tempAdsAgentPromoCodeList.push(adsAgentList[i].promoCode)
                                       }
                                       for(var i=0;i<agentList.length;i++){
+                                        if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
+                                          adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+                                          flag+=1
+                                        }
+                                        else{
+                                          adsAgentPromoCodeList.push(agentList[i].nickName)
+                                        }
                                         for(var j=0;j<adsAgentIDList.length;j++){
                                           if(adsAgentIDList[j]==(agentList[i]._id)){
                                             agentList[i].isTicked=true
                                           }
                                         }
                                       }
+                                      console.log('masuk sini 3');
                                       res.render('adsDetail',{
+                                        adsAgentPromoCodeList : adsAgentPromoCodeList,
                                         agentList : agentList,
                                         dtExpiryCustom : dtExpiryCustom,
                                         message : '',
@@ -383,6 +451,9 @@ function updateAds(req,res,next){
 function detailads(req,res,next){
   Ads.findById(req.params.id, function(err,items){
     var adsAgentIDList = []
+    var adsAgentPromoCodeList = []
+    var tempAdsAgentPromoCodeList = []
+    var flag = 0
     var dtExpiryCustom = items.dtExpiry.toISOString()
 
     var year = dtExpiryCustom.substring(0,4)
@@ -393,18 +464,28 @@ function detailads(req,res,next){
 
     Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
       if(err)throw err
-      AdsAgent.find({},'-_id agentId').where('voucherId').equals(req.params.id).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
+      AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.params.id).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
         for(var i=0;i<adsAgentList.length;i++){
           adsAgentIDList.push(adsAgentList[i].agentId)
+          tempAdsAgentPromoCodeList.push(adsAgentList[i].promoCode)
         }
         for(var i=0;i<agentList.length;i++){
+          if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
+            adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+            flag+=1
+          }
+          else{
+            adsAgentPromoCodeList.push(agentList[i].nickName)
+          }
           for(var j=0;j<adsAgentIDList.length;j++){
             if(adsAgentIDList[j]==(agentList[i]._id)){
               agentList[i].isTicked=true
             }
           }
         }
+        console.log('masuk sini 6');
         res.render('adsDetail',{
+          adsAgentPromoCodeList: adsAgentPromoCodeList,
           agentList : agentList,
           dtExpiryCustom : dtExpiryCustom,
           message : '',
