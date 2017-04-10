@@ -365,7 +365,7 @@ function updateAds(req,res,next){
                                             adsAgentItem = new AdsAgent({
                                               agentId:parse[0],
                                               voucherId:req.body.adsId,
-                                              promoCode:parse[1],
+                                              promoCode:promoCodeArray[i],
                                               counter:0,
                                               vendor:req.body.vendor,
                                               imageUrl:req.body.imageUrl,
@@ -386,7 +386,6 @@ function updateAds(req,res,next){
                                                   .replace("\'","\"").replace("\'","\"").replace("\'","\"").replace("\'","\"")
                                         var c = b.substr(0, 9) + "\"" + b.substr(9);
                                         var d = c.substr(0, 34) + "\"" + c.substr(34);
-                                        console.log(d);
                                         var a = JSON.parse(d)
                                         if(a._id!=parse[0]){
                                           AdsAgent.find({'agentId':a._id,'voucherId':req.body.adsId}).remove().exec()
@@ -402,12 +401,11 @@ function updateAds(req,res,next){
                                                 console.log('insert', items);
                                               })
                                         }else if(a._id==parse[0]&&!a.isTicked){
-                                          console.log('insert');
                                           parse = agentIds.split("-")
                                           adsAgentItem = new AdsAgent({
                                             agentId:parse[0],
                                             voucherId:req.body.adsId,
-                                            promoCode:parse[1],
+                                            promoCode:promoCodeArray[i],
                                             counter:0,
                                             vendor:req.body.vendor,
                                             imageUrl:req.body.imageUrl,
