@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ../template/head.ejs %>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <%- include ../template/navigation.ejs %>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Project</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <!-- Corporate Detail Page -->
+            <div class="row">
+              <div class="col-lg-12">
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-success"><%= message %></div>
+                <% } %>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    Project Detail
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <tbody>
+                              <tr>
+                                  <th>Project Name</th>
+                                  <td><%= projectDetail[0].projectName %></td>
+                              </tr>
+                              <tr>
+                                  <th>Start Date</th>
+                                  <td><%= moment(projectDetail[0].start_dt).format("DD-MMM-YYYY") %></td>
+                              </tr>
+                              <tr>
+                                  <th>End Date</th>
+                                  <td><%= moment(projectDetail[0].end_dt).format("DD-MMM-YYYY") %></td>
+                              </tr>
+                              <tr>
+                                  <th>Date Created</th>
+                                  <td><%= moment(projectDetail[0].dt_created).format("DD-MMM-YYYY hh:mm:ss") %></td>
+                              </tr>
+                              <tr>
+                                  <th>Created By</th>
+                                  <td><%= projectDetail[0].created_by %></td>
+                              </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="/admin/project/list" class="btn btn-default">Back</a>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <%- include ../template/tail.ejs %>
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            "columnDefs": [
+              { "width": "30%", "targets": 0 }
+            ]
+        });
+    });
+    </script>
+
+</body>
+
+</html>

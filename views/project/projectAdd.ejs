@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ../template/head.ejs %>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <%- include ../template/navigation.ejs %>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Project</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+              <form action="/admin/project/add" method="post" encType="multipart/form-data">
+                <div class="col-lg-12">
+                  <% if (message.length > 0) { %>
+                    <% for(var i=0; i<message.length; i++) { %>
+                      <div class="alert alert-danger"><%= message[i] %></div>
+                    <% } %>
+                  <% } %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Add Project
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                              <label>Corporate Name</label>
+                                              <p><%= corporateDetail[0].name %></p>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Name</label>
+                                              <input type="text" placeholder="Name" id="name" name="name" class="form-control" value="<%= data.name %>">
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Start Date</label>
+                                              <input class="form-control" id="startDatePicker" placeholder="Start Date" name="startDate" value="<%= data.startDate %>"/>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>End Date</label>
+                                              <input class="form-control" id="endDatePicker" placeholder="End Date" name="endDate" value="<%= data.endDate %>"/>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Upload Photo</label>
+                                              <input class="form-control" type="file" name="projectPhoto">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <button type="submit" class="btn btn-default">Add</button>
+                    <a href="/admin/project/list" class="btn btn-default">Back</a>
+                    <input type="hidden" name="corpId" value="<%=  corporateDetail[0].id%>"
+                </div>
+                <!-- /.col-lg-12 -->
+              </form>
+              <!-- /form -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <%- include ../template/tail.ejs %>
+    <script>
+     $(document).ready(function() {
+       $("#startDatePicker").datepicker();
+       $("#endDatePicker").datepicker();
+     });
+    </script>
+
+</body>
+
+</html>

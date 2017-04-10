@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ../template/head.ejs %>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <%- include ../template/navigation.ejs %>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Corporate</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+              <div class="col-lg-12">
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-success"><%= message %></div>
+                <% } %>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    Corporate List
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                      <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Created Date</th>
+                            <th>Created By</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                            <% for(var i=0; i<corporateList.length; i++) { %>
+                              <tr class="">
+                                <td><a href="/admin/corporate/detail/<%= corporateList[i].id%>"><%= corporateList[i].name %></a></td>
+                                <td><%= moment(corporateList[i].dt_created).format("YYYY-MM-DD") %></td>
+                                <td><%= corporateList[i].fullName %></td>
+                                <td>
+                                  <a href='/admin/corporate/delete/<%= corporateList[i].id%>'>Delete</a>
+                                </td>
+                              </tr>
+                            <% } %>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <a class="btn btn-default" href="/admin/corporate/add" role="button">Add</a>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <%- include ../template/tail.ejs %>
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            "columnDefs": [
+              { "width": "50%", "targets": 0 }
+            ]
+        });
+    });
+    </script>
+
+</body>
+
+</html>

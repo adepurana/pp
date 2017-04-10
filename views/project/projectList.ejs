@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ../template/head.ejs %>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <%- include ../template/navigation.ejs %>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Project</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- Corporate User Page -->
+            <div class="row">
+              <div class="col-lg-12">
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-success"><%= message %></div>
+                <% } %>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    Project List
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                      <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                          <tr>
+                            <th>Project Name</th>
+                            <th>Corporate Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% for(var i=0; i<projectList.length; i++) { %>
+                            <tr class="">
+                              <td>
+                                <a href="/admin/project/detail?projectId=<%=projectList[i].id %>">
+                                  <%= projectList[i].projectName %>
+                                </a>
+                              </td>
+                              <td><%= projectList[i].corpName %></td>
+                              <td><%= moment(projectList[i].start_dt).format("YYYY-MM-DD") %></td>
+                              <td><%= moment(projectList[i].end_dt).format("YYYY-MM-DD") %></td>
+                              <td>
+                                <a href='/admin/project/delete?projectId=<%= projectList[i].id %>'>Delete</a>
+                              </td>
+                            </tr>
+                          <% } %>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <a href="/admin/project/add?corpId=<%= user.corpId %>" class="btn btn-default">Add</a>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <%- include ../template/tail.ejs %>
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            "columnDefs": [
+              { "width": "30%", "targets": 0 }
+            ]
+        });
+    });
+    </script>
+
+</body>
+
+</html>

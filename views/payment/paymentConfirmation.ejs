@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Veritrans -->
+  <script type="text/javascript"
+            src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="<%= clientKey %>"></script>
+
+  <%- include ../template/head.ejs %>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <%- include ../template/navigation.ejs %>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Payment</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <!-- Corporate Detail Page -->
+            <div class="row">
+              <div class="col-lg-12">
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-success"><%= message %></div>
+                <% } %>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    Payment Confirmation
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <tbody>
+                              <tr>
+                                  <th>Order ID</th>
+                                  <td><%= form.transaction_details.order_id %></td>
+                              </tr>
+                              <tr>
+                                  <th>Amount</th>
+                                  <td><%= form.transaction_details.gross_amount %></td>
+                              </tr>
+                              <tr>
+                                  <th>SNAP Token Veritrans</th>
+                                  <td><%= token %></td>
+                              </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="/admin/corporate/list" class="btn btn-default">Back</a>
+                  <button class="btn btn-default" id="pay-button">Pay</button>
+                  <script type="text/javascript">
+                    var payButton = document.getElementById('pay-button');
+
+                    payButton.addEventListener('click', function () {
+                      snap.pay('<%= token %>', {
+                        onSuccess: function(result){console.log('success');console.log(result);},
+                        onPending: function(result){console.log('pending');console.log(result);},
+                        onError: function(result){console.log('error');console.log(result);},
+                        onClose: function(){console.log('customer closed the popup without finishing the payment');}
+                      })
+                    });
+
+
+                  </script>
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <%- include ../template/tail.ejs %>
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            "columnDefs": [
+              { "width": "30%", "targets": 0 }
+            ]
+        });
+    });
+    </script>
+    <script src="/js/payment.js"></script>
+</body>
+
+</html>
