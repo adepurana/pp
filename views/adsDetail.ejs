@@ -159,6 +159,7 @@
         								<tr>
                           <th>Check</th>
           								<th>Nickname</th>
+                          <th>Promo Code</th>
       									</tr>
     								</thead>
       							<tbody>
@@ -175,6 +176,7 @@
                             </td>
                           <% } %>
                             <td><%= agentList[i].nickName%></td>
+                            <td><input type="text" style="font-size: 16px;" id="promo-<%= agentList[i]._id%>" name="promoCode" value="<%= adsAgentPromoCodeList[i]%>"</td>
                             <input type="hidden" name="preAgentList" value="<%= agentList[i] %>">
                       </tr>
                       <%}%>
