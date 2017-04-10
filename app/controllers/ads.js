@@ -43,7 +43,7 @@ function updateAds(req,res,next){
 
       dtExpiryCustom = month+'/'+day+'/'+year;
 
-      Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
+      Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
         if(err)throw err
         AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
           for(var i=0;i<adsAgentList.length;i++){
@@ -103,7 +103,7 @@ function updateAds(req,res,next){
 
         dtExpiryCustom = month+'/'+day+'/'+year;
 
-        Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
+        Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
           if(err)throw err
           AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
             for(var i=0;i<adsAgentList.length;i++){
@@ -191,7 +191,7 @@ function updateAds(req,res,next){
                         //----------------- UPDATE LISTING ------------------//
                               if(req.body.agentChecked == null){
                                 AdsAgent.find({}).where('voucherId').equals(req.body.adsId).remove().exec();
-                                Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
+                                Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
                                   if(err)throw err
                                   AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
                                     for(var i=0;i<adsAgentList.length;i++){
@@ -248,6 +248,7 @@ function updateAds(req,res,next){
                                           var postAgentId,postVoucerId
                                           parse = agentIds[j].split("-")
                                           if(parse[0]==preAgentListArray[k]._id&&preAgentListArray[k].isTicked){
+                                            console.log('flag',flag);
                                             AdsAgent.findOneAndUpdate({agentId:parse[0],voucherId:req.body.adsId},
                                               {$set:
                                                 {
@@ -273,7 +274,9 @@ function updateAds(req,res,next){
                                               imageUrl:req.body.imageUrl,
                                               dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
                                             })
-                                            adsAgentItem.save(function(err,adsAgent){})
+                                            adsAgentItem.save(function(err,adsAgent){
+                                              console.log('insert',adsAgent);
+                                            })
                                             console.log('need insert',parse[0]);
                                           }
                                           else{
@@ -290,15 +293,17 @@ function updateAds(req,res,next){
                                         flag+=1
                                       }
                                       flag=0
-                                    Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
+                                    Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
                                       if(err)throw err
                                       AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
                                         for(var i=0;i<adsAgentList.length;i++){
                                           adsAgentIDList.push(adsAgentList[i].agentId)
                                           tempAdsAgentPromoCodeList.push(adsAgentList[i].promoCode)
                                         }
+
                                         for(var i=0;i<agentList.length;i++){
                                           if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
+                                            console.log(tempAdsAgentPromoCodeList[flag]);
                                             adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
                                             flag+=1
                                           }
@@ -325,7 +330,6 @@ function updateAds(req,res,next){
                               }
                               // IF ONLY TICKED 1 ITEM
                               else{
-                                console.log(req.body.preAgentList);
                                 //if only ticked 1 item of 1 item
                                 if(req.body.preAgentList.constructor === Array){
                                         for(var i=0;i<req.body.preAgentList.length;i++){
@@ -339,18 +343,22 @@ function updateAds(req,res,next){
                                                     .replace("\'","\"").replace("\'","\"").replace("\'","\"").replace("\'","\"")
                                           var c = b.substr(0, 9) + "\"" + b.substr(9);
                                           var d = c.substr(0, 34) + "\"" + c.substr(34);
-                                          console.log(d);
                                           var a = JSON.parse(d)
+                                          console.log('JSON.parse',a);
                                           if(a._id!=parse[0]){
                                             AdsAgent.find({'agentId':a._id,'voucherId':req.body.adsId}).remove().exec()
                                           }else if(a._id==parse[0]&&a.isTicked){
+                                            console.log('update');
                                             AdsAgent.findOneAndUpdate({agentId:parse[0],voucherId:req.body.adsId},
                                               {$set:
                                                 {
+                                                  promoCode:promoCodeArray[i],
                                                   vendor:req.body.vendor,
                                                   imageUrl:req.body.imageUrl,
                                                   dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
-                                                }}, function(err,items){})
+                                                }}, function(err,items){
+                                                  console.log('items update',items);
+                                                })
                                           }else if(a._id==parse[0]&&!a.isTicked){
                                             console.log('insert');
                                             parse = agentIds.split("-")
@@ -386,10 +394,13 @@ function updateAds(req,res,next){
                                           AdsAgent.findOneAndUpdate({agentId:parse[0],voucherId:req.body.adsId},
                                             {$set:
                                               {
+                                                promoCode:promoCodeArray[i],
                                                 vendor:req.body.vendor,
                                                 imageUrl:req.body.imageUrl,
                                                 dtExpiry:tomorrow.setDate(tomorrow.getDate()+1)
-                                              }}, function(err,items){})
+                                              }}, function(err,items){
+                                                console.log('insert', items);
+                                              })
                                         }else if(a._id==parse[0]&&!a.isTicked){
                                           console.log('insert');
                                           parse = agentIds.split("-")
@@ -406,7 +417,7 @@ function updateAds(req,res,next){
                                         }
                                   }
                                   // ======
-                                  Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
+                                  Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
                                     if(err)throw err
                                     AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
                                       for(var i=0;i<adsAgentList.length;i++){
@@ -462,7 +473,7 @@ function detailads(req,res,next){
 
     dtExpiryCustom = month+'/'+day+'/'+year;
 
-    Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
+    Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
       if(err)throw err
       AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.params.id).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
         for(var i=0;i<adsAgentList.length;i++){
