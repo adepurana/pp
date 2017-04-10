@@ -43,7 +43,7 @@ function updateAds(req,res,next){
 
       dtExpiryCustom = month+'/'+day+'/'+year;
 
-      Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
+      Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
         if(err)throw err
         AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
           for(var i=0;i<adsAgentList.length;i++){
@@ -53,7 +53,7 @@ function updateAds(req,res,next){
 
           for(var i=0;i<agentList.length;i++){
             if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
-              adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+              adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[adsAgentIDList.indexOf(agentList[i]._id.toString())])
               flag+=1
             }
             else{
@@ -103,7 +103,7 @@ function updateAds(req,res,next){
 
         dtExpiryCustom = month+'/'+day+'/'+year;
 
-        Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
+        Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
           if(err)throw err
           AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
             for(var i=0;i<adsAgentList.length;i++){
@@ -112,7 +112,7 @@ function updateAds(req,res,next){
             }
             for(var i=0;i<agentList.length;i++){
               if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
-                adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+                adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[adsAgentIDList.indexOf(agentList[i]._id.toString())])
                 flag+=1
               }
               else{
@@ -191,7 +191,7 @@ function updateAds(req,res,next){
                         //----------------- UPDATE LISTING ------------------//
                               if(req.body.agentChecked == null){
                                 AdsAgent.find({}).where('voucherId').equals(req.body.adsId).remove().exec();
-                                Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
+                                Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
                                   if(err)throw err
                                   AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
                                     for(var i=0;i<adsAgentList.length;i++){
@@ -200,7 +200,7 @@ function updateAds(req,res,next){
                                     }
                                     for(var i=0;i<agentList.length;i++){
                                       if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
-                                        adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+                                        adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[adsAgentIDList.indexOf(agentList[i]._id.toString())])
                                         flag+=1
                                       }
                                       else{
@@ -293,7 +293,7 @@ function updateAds(req,res,next){
                                         flag+=1
                                       }
                                       flag=0
-                                    Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
+                                    Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
                                       if(err)throw err
                                       AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
                                         for(var i=0;i<adsAgentList.length;i++){
@@ -304,7 +304,7 @@ function updateAds(req,res,next){
                                         for(var i=0;i<agentList.length;i++){
                                           if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
                                             console.log(tempAdsAgentPromoCodeList[flag]);
-                                            adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+                                            adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[adsAgentIDList.indexOf(agentList[i]._id.toString())])
                                             flag+=1
                                           }
                                           else{
@@ -417,7 +417,7 @@ function updateAds(req,res,next){
                                         }
                                   }
                                   // ======
-                                  Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
+                                  Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
                                     if(err)throw err
                                     AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.body.adsId).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
                                       for(var i=0;i<adsAgentList.length;i++){
@@ -426,7 +426,7 @@ function updateAds(req,res,next){
                                       }
                                       for(var i=0;i<agentList.length;i++){
                                         if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
-                                          adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+                                          adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[adsAgentIDList.indexOf(agentList[i]._id.toString())])
                                           flag+=1
                                         }
                                         else{
@@ -473,7 +473,7 @@ function detailads(req,res,next){
 
     dtExpiryCustom = month+'/'+day+'/'+year;
 
-    Agent.find({}).sort({"_id":"asc"}).exec(function(err,agentList){
+    Agent.find({}).sort({"nickName":"asc"}).exec(function(err,agentList){
       if(err)throw err
       AdsAgent.find({},'-_id agentId promoCode').where('voucherId').equals(req.params.id).sort({"agentId":"asc"}).exec(function(err,adsAgentList){
         for(var i=0;i<adsAgentList.length;i++){
@@ -482,7 +482,7 @@ function detailads(req,res,next){
         }
         for(var i=0;i<agentList.length;i++){
           if(adsAgentIDList.indexOf(agentList[i]._id.toString()) > -1){
-            adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[flag])
+            adsAgentPromoCodeList.push(tempAdsAgentPromoCodeList[adsAgentIDList.indexOf(agentList[i]._id.toString())])
             flag+=1
           }
           else{
